@@ -86,9 +86,6 @@
             align-items: center;
             transition: transform 0.15s cubic-bezier(.3,1.5,.5,1.2);
         }
-        .logo-link:hover, .logo-link:active {
-            transform: scale(0.96) rotate(-2deg);
-        }
         
 
         .hero {
@@ -678,6 +675,15 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+
+        @media (max-width: 768px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+        
         
         @media (max-width: 960px) {
             .nav-links {
@@ -705,10 +711,10 @@
 <body>
     <header>
         <div class="container nav-container">
-            <div class="logo-pill" tabindex="0" onclick="window.location.href='/'">
-                <img src="/api/placeholder/50/50" alt="Happit Logo" class="logo-img">
+            <a href="/" class="logo-link" tabindex="0">
+                <img src="assets/images/logo/png_logo.png" alt="Happit Logo" class="logo" />
                 <span class="logo-text">Happit</span>
-            </div>
+            </a>            
             <nav>
                 <ul class="nav-links">
                     ...
