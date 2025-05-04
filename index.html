@@ -39,12 +39,120 @@
         }
 
         header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
             z-index: 100;
-        }
+          }
+          
+          .header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            padding: 0 32px;
+            gap: 16px;
+            width: 100%;
+          }
+          
+          .logo-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Baloo 2', cursive;
+            font-weight: 700;
+            color: var(--primary, #ff7a59);
+            text-decoration: none;
+            font-size: 1.3rem;
+            min-width: 120px;
+          }
+          
+          .logo {
+            height: 20px;
+            width: auto;
+          }
+          
+          .announcement {
+            flex: 1;
+            text-align: center;
+            color: #fff;
+            background: var(--primary, #ff7a59);
+            font-weight: 600;
+            font-size: 1.08rem;
+            border-radius: 18px;
+            padding: 7px 16px;
+            margin: 0 24px;
+            white-space: nowrap;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+          }
+          
+          nav {
+            min-width: 340px;
+          }
+          
+          .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            justify-content: flex-end;
+          }
+          
+          .nav-links a {
+            color: var(--dark, #333);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+            font-size: 1rem;
+          }
+          
+          .nav-links a:hover, .nav-links a.active {
+            background: var(--accent, #ffdfd7);
+            color: var(--primary, #ff7a59);
+          }
+          
+          @media (max-width: 900px) {
+            .header-bar {
+              flex-direction: column;
+              height: auto;
+              padding: 8px 6px;
+              gap: 8px;
+            }
+            .announcement {
+              margin: 6px 0;
+              font-size: 1rem;
+              border-radius: 12px;
+              padding: 6px 10px;
+            }
+            nav {
+              min-width: unset;
+              width: 100%;
+            }
+            .nav-links {
+              justify-content: center;
+              gap: 10px;
+            }
+          }
+          
+          @media (max-width: 600px) {
+            .logo {
+              height: 32px;
+            }
+            .logo-link {
+              font-size: 1.05rem;
+              min-width: 80px;
+            }
+            .announcement {
+              font-size: 0.95rem;
+              padding: 4px 6px;
+            }
+            .nav-links a {
+              font-size: 0.95rem;
+              padding: 6px 8px;
+            }
+          }
 
         .container {
             max-width: 1200px;
@@ -92,7 +200,7 @@
             background-color: var(--primary);
             color: white;
             text-align: center;
-            padding: 80px 20px;
+            padding: 50px 10px;
             border-radius: 0 0 50px 50px;
             position: relative;
             overflow: hidden;
@@ -165,7 +273,7 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 40px 0;
             position: relative;
         }
 
@@ -459,7 +567,7 @@
         /* Random emoji hover animations instead of bounce */
         .emoji {
             display: inline-block;
-            font-size: 1.5em;
+            font-size: 1.25em;
             margin: 0 5px;
             transition: transform 0.3s ease;
         }
@@ -492,7 +600,7 @@
         
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.5); }
+            50% { transform: scale(1.25); }
             100% { transform: scale(1); }
         }
 
@@ -710,25 +818,49 @@
 </head>
 <body>
     <header>
-        <div class="container nav-container">
-            <a href="/" class="logo-link" tabindex="0">
-                <img src="assets/images/logo/png_logo.png" alt="Happit Logo" class="logo" />
-                <span class="logo-text">Happit</span>
+        <div class="header-bar">
+          <a href="/" class="logo-link" tabindex="0">
+            <img src="assets/images/logo/png_logo.png" alt="Happit Logo" class="logo" />
+            <!-- <span class="logo-text">Happit</span> -->
+          </a>
             </a>            
-            <nav>
-                <ul class="nav-links">
-                    ...
-                </ul>
-            </nav>
+          </a>
+            </a>            
+          </a>
+            </a>            
+          </a>
+            </a>            
+          </a>
+            </a>            
+          </a>
+            </a>            
+          </a>
+            </a>            
+          </a>
+            </a>            
+          </a>
+          <div class="announcement">
+            ✨ Free Shipping on Orders Over $50! ✨
+          </div>
+          <nav>
+            <ul class="nav-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#categories">Categories</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
         </div>
-    </header>
+      </header>
+      
     
 
     <!-- Floating bubbles container -->
     <div class="bubble-container" id="bubbleContainer"></div>
 
     <!-- Walking dog element -->
-    <div class="walking-dog">
+    <!-- <div class="walking-dog">
         <div class="dog-body"></div>
         <div class="dog-head">
             <div class="dog-ear dog-ear-left"></div>
@@ -739,18 +871,18 @@
         <div class="dog-leg dog-leg-2"></div>
         <div class="dog-leg dog-leg-3"></div>
         <div class="dog-leg dog-leg-4"></div>
-    </div>
+    </div> -->
 
     <section class="hero">
         <!-- Hero bubbles -->
-        <div class="bubble" style="width: 40px; height: 40px; top: 10%; left: 10%;"></div>
+        <!-- <div class="bubble" style="width: 40px; height: 40px; top: 10%; left: 10%;"></div> -->
         <div class="bubble" style="width: 25px; height: 25px; top: 30%; left: 20%; animation-delay: 1s;"></div>
-        <div class="bubble" style="width: 60px; height: 60px; top: 15%; left: 80%; animation-delay: 2s;"></div>
+        <!-- <div class="bubble" style="width: 60px; height: 60px; top: 15%; left: 80%; animation-delay: 2s;"></div> -->
         <div class="bubble" style="width: 35px; height: 35px; top: 50%; left: 85%; animation-delay: 3s;"></div>
         <div class="bubble" style="width: 20px; height: 20px; top: 70%; left: 30%; animation-delay: 1.5s;"></div>
         
         <div class="container">
-            <h1>Unleash Joy & Imagination <span class="emoji">🧸</span></h1>
+            <h1>Make it Happit<span class="emoji"></span></h1>
             <p>Life's too short for boring toys! Discover playful treasures that spark joy for the young and young-at-heart.</p>
             <a href="#products" class="btn">Discover Happiness <span class="emoji">✨</span></a>
         </div>
@@ -759,7 +891,7 @@
     <section id="categories">
         <div class="container">
             <div class="section-header">
-                <h2>Play Your Way <span class="emoji">🎭</span></h2>
+                <h2>Play Your Way <span class="emoji">🤩</span></h2>
                 <p>Every toy tells a story. What will yours be? Browse our collections and find your perfect playmate.</p>
             </div>
             <div class="categories">
@@ -1018,11 +1150,11 @@
             emojis.forEach(emoji => {
                 emoji.addEventListener('mouseover', function() {
                     // Random selection of effect
-                    const effects = ['spin', 'wobble', 'pulse'];
+                    const effects = [ 'wobble', 'pulse'];
                     const randomEffect = effects[Math.floor(Math.random() * effects.length)];
                     
                     // Apply the random effect
-                    this.style.animation = `${randomEffect} 0.6s ease`;
+                    this.style.animation = `${randomEffect} 1s ease`;
                 });
                 
                 emoji.addEventListener('mouseout', function() {
