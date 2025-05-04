@@ -39,7 +39,7 @@
         }
 
         header {
-            background: #fff;
+            background: var(--light);
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             position: sticky;
             top: 0;
@@ -74,17 +74,11 @@
           }
           
           .announcement {
-            flex: 1;
             text-align: center;
-            color: #fff;
-            background: var(--primary, #ff7a59);
+            color: var(--primary);
+            background: var(--light);
             font-weight: 600;
             font-size: 1.08rem;
-            border-radius: 18px;
-            padding: 7px 16px;
-            margin: 0 24px;
-            white-space: nowrap;
-            box-shadow: 0 1px 6px rgba(0,0,0,0.04);
           }
           
           nav {
@@ -784,13 +778,6 @@
             transform: translateY(0);
         }
 
-
-        @media (max-width: 768px) {
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-        }
         
         
         @media (max-width: 960px) {
@@ -876,10 +863,10 @@
     <section class="hero">
         <!-- Hero bubbles -->
         <!-- <div class="bubble" style="width: 40px; height: 40px; top: 10%; left: 10%;"></div> -->
-        <div class="bubble" style="width: 25px; height: 25px; top: 30%; left: 20%; animation-delay: 1s;"></div>
+        <!-- <div class="bubble" style="width: 25px; height: 25px; top: 30%; left: 20%; animation-delay: 1s;"></div> -->
         <!-- <div class="bubble" style="width: 60px; height: 60px; top: 15%; left: 80%; animation-delay: 2s;"></div> -->
-        <div class="bubble" style="width: 35px; height: 35px; top: 50%; left: 85%; animation-delay: 3s;"></div>
-        <div class="bubble" style="width: 20px; height: 20px; top: 70%; left: 30%; animation-delay: 1.5s;"></div>
+        <!-- <div class="bubble" style="width: 35px; height: 35px; top: 50%; left: 85%; animation-delay: 3s;"></div>
+        <div class="bubble" style="width: 20px; height: 20px; top: 70%; left: 30%; animation-delay: 1.5s;"></div> -->
         
         <div class="container">
             <h1>Make it Happit<span class="emoji"></span></h1>
@@ -934,7 +921,7 @@
     <section id="products">
         <div class="container">
             <div class="section-header">
-                <h2>Happiness Essentials <span class="emoji">🚀</span></h2>
+                <h2>Happiness Essentials <span class="emoji">🥳</span></h2>
                 <p>Our handpicked treasures guaranteed to deliver smiles, wonder, and playful moments.</p>
             </div>
             <div class="products">
