@@ -3,502 +3,883 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happit - Thoughtful Gifting Made Simple</title>
+    <title>Happit - Where Play Comes Alive</title>
+    <!-- Added Google Fonts for better typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Baloo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #FF7F65; /* The coral color from your logo */
-            --primary-light: #FFD8D0;
-            --text-light: #FAF3E8; /* Off-white from logo */
-            --text-dark: #3E3E3E;
-            --bg-light: #FFFFFF;
-            --bg-accent: #F9F9F9;
-            --spacing-xs: 8px;
-            --spacing-sm: 16px;
-            --spacing-md: 24px;
-            --spacing-lg: 48px;
-            --spacing-xl: 64px;
-            --border-radius: 12px;
+            --primary: #ff7a59;
+            --secondary: #ff9a82;
+            --accent: #ffdfd7;
+            --dark: #333333;
+            --light: #fff5f2;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Quicksand', sans-serif;
         }
-        
+
         body {
-            color: var(--text-dark);
-            background-color: var(--bg-light);
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
-        
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Baloo 2', cursive;
+            font-weight: 600;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--spacing-md);
+            padding: 0 20px;
         }
-        
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--bg-light);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            z-index: 100;
-        }
-        
-        .header-content {
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--spacing-sm) 0;
+            padding: 15px 0;
         }
-        
+
         .logo {
             height: 50px;
         }
-        
-        nav ul {
+
+        .nav-links {
             display: flex;
             list-style: none;
-            gap: var(--spacing-md);
+            gap: 30px;
         }
-        
-        nav a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.2s;
+
+        .nav-links a {
+            color: var(--dark);
+            font-family: inherit;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
         }
-        
-        nav a:hover {
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--accent);
             color: var(--primary);
         }
-        
-        .hero {
-            padding-top: 120px;
-            padding-bottom: var(--spacing-xl);
-            background-color: var(--bg-light);
-        }
-        
-        .hero-content {
+        .logo-link {
             display: flex;
             align-items: center;
-            gap: var(--spacing-lg);
+            transition: transform 0.15s cubic-bezier(.3,1.5,.5,1.2);
+        }
+        .logo-link:hover, .logo-link:active {
+            transform: scale(0.96) rotate(-2deg);
         }
         
-        .hero-text {
-            flex: 1;
-        }
-        
-        .hero-text h1 {
-            font-size: 3rem;
-            line-height: 1.2;
-            margin-bottom: var(--spacing-md);
-            font-weight: 700;
-        }
-        
-        .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: var(--spacing-md);
-            color: #666;
-        }
-        
-        .hero-image {
-            flex: 1;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: var(--border-radius);
-        }
-        
-        .button {
-            display: inline-block;
+
+        .hero {
             background-color: var(--primary);
-            color: var(--text-light);
-            padding: var(--spacing-sm) var(--spacing-md);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 0 0 50px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Floating bubbles styling */
+        .bubble {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(-40px) translateX(0);
+            }
+            75% {
+                transform: translateY(-20px) translateX(-10px);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 12px 24px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid white;
+            cursor: pointer;
         }
-        
-        .button:hover {
-            background-color: #E86954;
-        }
-        
-        .button.secondary {
+
+        .btn:hover {
             background-color: transparent;
-            color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--primary);
+            color: white;
             border: 2px solid var(--primary);
-            margin-left: var(--spacing-sm);
         }
-        
-        .button.secondary:hover {
-            background-color: var(--primary-light);
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary);
+            border-color: white;
         }
-        
+
         section {
-            padding: var(--spacing-xl) 0;
+            padding: 80px 0;
+            position: relative;
         }
-        
-        section.alt {
-            background-color: var(--bg-accent);
-        }
-        
+
         .section-header {
             text-align: center;
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: 50px;
         }
-        
+
         .section-header h2 {
             font-size: 2.5rem;
-            margin-bottom: var(--spacing-sm);
+            margin-bottom: 15px;
+            color: var(--primary);
         }
-        
+
         .section-header p {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 600px;
+            font-size: 1.2rem;
+            max-width: 700px;
             margin: 0 auto;
         }
-        
-        .features {
+
+        .categories {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-md);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
         }
-        
-        .feature-card {
-            background-color: var(--bg-light);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background-color: var(--primary-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--spacing-sm);
-        }
-        
-        .feature-icon span {
-            font-size: 24px;
-            color: var(--primary);
-        }
-        
-        .feature-card h3 {
-            margin-bottom: var(--spacing-xs);
-        }
-        
-        .gift-categories {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--spacing-md);
-        }
-        
+
         .category-card {
-            border-radius: var(--border-radius);
+            background-color: white;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .category-image {
-            height: 200px;
-            background-color: var(--primary-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .category-image span {
-            font-size: 48px;
-            color: var(--primary);
-        }
-        
-        .category-content {
-            padding: var(--spacing-sm);
             text-align: center;
         }
-        
-        .testimonials {
+
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background-color: #f9f9f9;
+        }
+
+        .category-content {
+            padding: 20px;
+        }
+
+        .category-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .products {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-md);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
         }
-        
+
+        .product-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 250px;
+            width: 100%;
+            object-fit: contain;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-content h3 {
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-content p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .testimonials {
+            background-color: var(--accent);
+            border-radius: 50px;
+            margin: 20px;
+        }
+
+        .testimonial-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
         .testimonial-card {
-            background-color: var(--bg-light);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 350px;
         }
-        
+
         .testimonial-text {
             font-style: italic;
-            margin-bottom: var(--spacing-md);
+            margin-bottom: 20px;
         }
-        
+
         .testimonial-author {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
-        
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-light);
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            margin-right: var(--spacing-sm);
+            object-fit: cover;
+        }
+
+        .about {
+            background-color: white;
+            border-radius: 50px;
+            margin: 20px;
+        }
+
+        .about-content {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--primary);
+            gap: 50px;
+            flex-wrap: wrap;
         }
-        
-        footer {
-            background-color: var(--text-dark);
-            color: var(--text-light);
-            padding: var(--spacing-lg) 0;
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
         }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: var(--spacing-lg);
-        }
-        
-        .footer-logo img {
-            height: 40px;
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .footer-links h4 {
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .footer-links ul {
-            list-style: none;
-        }
-        
-        .footer-links a {
-            color: #CCC;
-            text-decoration: none;
-            display: block;
-            margin-bottom: var(--spacing-xs);
-            transition: color 0.2s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--text-light);
-        }
-        
-        .copyright {
-            margin-top: var(--spacing-lg);
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
             text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 20px;
+        }
+
+        .contact {
+            background-color: var(--accent);
+            border-radius: 50px 50px 0 0;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            color: var(--primary);
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--light);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
             font-size: 0.9rem;
-            color: #999;
+            opacity: 0.8;
+        }
+
+        /* Random emoji hover animations instead of bounce */
+        .emoji {
+            display: inline-block;
+            font-size: 1.5em;
+            margin: 0 5px;
+            transition: transform 0.3s ease;
         }
         
-        @media (max-width: 900px) {
-            .hero-content {
+        .emoji:nth-child(3n+1):hover {
+            animation: spin 1s ease;
+        }
+        
+        .emoji:nth-child(3n+2):hover {
+            animation: wobble 1s ease;
+        }
+        
+        .emoji:nth-child(3n+3):hover {
+            animation: pulse 1s ease;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes wobble {
+            0%, 100% { transform: translateX(0); }
+            15% { transform: translateX(-15px) rotate(-5deg); }
+            30% { transform: translateX(10px) rotate(3deg); }
+            45% { transform: translateX(-10px) rotate(-3deg); }
+            60% { transform: translateX(5px) rotate(2deg); }
+            75% { transform: translateX(-5px) rotate(-1deg); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+
+        /* Walking animal at bottom of page */
+        .walking-dog {
+            position: fixed;
+            bottom: 10px;
+            left: -100px;
+            z-index: 100;
+            animation: walkAcross 30s linear infinite;
+            width: 100px;
+            height: 60px;
+        }
+        
+        .dog-body {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background-color: var(--secondary);
+            border-radius: 15px;
+            top: 15px;
+            left: 15px;
+        }
+        
+        .dog-head {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            top: 10px;
+            left: 5px;
+        }
+        
+        .dog-ear {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary);
+            border-radius: 50%;
+        }
+        
+        .dog-ear-left {
+            top: 2px;
+            left: 2px;
+        }
+        
+        .dog-ear-right {
+            top: 2px;
+            left: 15px;
+        }
+        
+        .dog-tail {
+            position: absolute;
+            width: 15px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 4px;
+            top: 20px;
+            right: 0;
+            transform-origin: 0 50%;
+            animation: wagTail 0.8s infinite alternate;
+        }
+        
+        .dog-leg {
+            position: absolute;
+            width: 8px;
+            height: 15px;
+            background-color: var(--dark);
+            border-radius: 4px;
+        }
+        
+        .dog-leg-1 {
+            bottom: 0;
+            left: 15px;
+            animation: moveLeg 0.4s infinite alternate;
+        }
+        
+        .dog-leg-2 {
+            bottom: 0;
+            right: 15px;
+            animation: moveLeg 0.4s 0.2s infinite alternate;
+        }
+        
+        .dog-leg-3 {
+            bottom: 0;
+            left: 55px;
+            animation: moveLeg 0.4s 0.1s infinite alternate;
+        }
+        
+        .dog-leg-4 {
+            bottom: 0;
+            right: 0;
+            animation: moveLeg 0.4s 0.3s infinite alternate;
+        }
+        
+        @keyframes wagTail {
+            0% { transform: rotate(-10deg); }
+            100% { transform: rotate(10deg); }
+        }
+        
+        @keyframes moveLeg {
+            0% { height: 15px; }
+            100% { height: 10px; }
+        }
+        
+        @keyframes walkAcross {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(calc(100vw + 100px)); }
+        }
+
+        /* Bubble container for floating bubbles */
+        .bubble-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light); 
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary); 
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary); 
+        }
+
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 0.5rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .mb-3 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 2rem; }
+        .mt-1 { margin-top: 0.5rem; }
+        .mt-2 { margin-top: 1rem; }
+        .mt-3 { margin-top: 1.5rem; }
+        .mt-4 { margin-top: 2rem; }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 960px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links.active {
+                display: flex;
                 flex-direction: column;
-            }
-            
-            .features, .gift-categories {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .testimonials {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .features, .gift-categories {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo-link">
-                    <img src="/api/placeholder/150/50" alt="Happit Logo" class="logo">
-                </a>
-                <nav>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#categories">Categories</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
+        <div class="container nav-container">
+            <div class="logo-pill" tabindex="0" onclick="window.location.href='/'">
+                <img src="/api/placeholder/50/50" alt="Happit Logo" class="logo-img">
+                <span class="logo-text">Happit</span>
             </div>
+            <nav>
+                <ul class="nav-links">
+                    ...
+                </ul>
+            </nav>
         </div>
     </header>
+    
+
+    <!-- Floating bubbles container -->
+    <div class="bubble-container" id="bubbleContainer"></div>
+
+    <!-- Walking dog element -->
+    <div class="walking-dog">
+        <div class="dog-body"></div>
+        <div class="dog-head">
+            <div class="dog-ear dog-ear-left"></div>
+            <div class="dog-ear dog-ear-right"></div>
+        </div>
+        <div class="dog-tail"></div>
+        <div class="dog-leg dog-leg-1"></div>
+        <div class="dog-leg dog-leg-2"></div>
+        <div class="dog-leg dog-leg-3"></div>
+        <div class="dog-leg dog-leg-4"></div>
+    </div>
 
     <section class="hero">
+        <!-- Hero bubbles -->
+        <div class="bubble" style="width: 40px; height: 40px; top: 10%; left: 10%;"></div>
+        <div class="bubble" style="width: 25px; height: 25px; top: 30%; left: 20%; animation-delay: 1s;"></div>
+        <div class="bubble" style="width: 60px; height: 60px; top: 15%; left: 80%; animation-delay: 2s;"></div>
+        <div class="bubble" style="width: 35px; height: 35px; top: 50%; left: 85%; animation-delay: 3s;"></div>
+        <div class="bubble" style="width: 20px; height: 20px; top: 70%; left: 30%; animation-delay: 1.5s;"></div>
+        
         <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Thoughtful Gifting <br>Made Simple</h1>
-                    <p>Discover perfect gifts for every occasion. Curated with care, delivered with joy.</p>
-                    <div>
-                        <a href="#" class="button">Shop Now</a>
-                        <a href="#" class="button secondary">How It Works</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="/api/placeholder/600/400" alt="Gift selection">
-                </div>
-            </div>
+            <h1>Unleash Joy & Imagination <span class="emoji">🧸</span></h1>
+            <p>Life's too short for boring toys! Discover playful treasures that spark joy for the young and young-at-heart.</p>
+            <a href="#products" class="btn">Discover Happiness <span class="emoji">✨</span></a>
         </div>
     </section>
 
-    <section id="about">
+    <section id="categories">
         <div class="container">
             <div class="section-header">
-                <h2>Why Choose Happit</h2>
-                <p>We make gifting an experience worth remembering, for both giver and receiver.</p>
+                <h2>Play Your Way <span class="emoji">🎭</span></h2>
+                <p>Every toy tells a story. What will yours be? Browse our collections and find your perfect playmate.</p>
             </div>
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span>🎁</span>
-                    </div>
-                    <h3>Curated Selection</h3>
-                    <p>Handpicked gifts from the finest brands and artisans around the world.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span>🚚</span>
-                    </div>
-                    <h3>Swift Delivery</h3>
-                    <p>Express shipping options available to meet even the tightest deadlines.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <span>✨</span>
-                    </div>
-                    <h3>Beautiful Packaging</h3>
-                    <p>Every gift comes wrapped in our signature style, ready to impress.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="categories" class="alt">
-        <div class="container">
-            <div class="section-header">
-                <h2>Gift Categories</h2>
-                <p>Find the perfect gift for any occasion and recipient</p>
-            </div>
-            <div class="gift-categories">
+            <div class="categories">
                 <div class="category-card">
-                    <div class="category-image">
-                        <span>🎂</span>
-                    </div>
+                    <img src="/api/placeholder/400/200" alt="Kids Toys" class="category-img">
                     <div class="category-content">
-                        <h3>Birthdays</h3>
-                        <p>Make their special day unforgettable</p>
+                        <h3>Wonder Makers<br><span class="emoji">🧩</span></h3>
+                        <p>Toys that inspire curiosity and creative thinking in young minds.</p>
+                        <a href="#" class="btn btn-secondary">Explore</a>
                     </div>
                 </div>
                 <div class="category-card">
-                    <div class="category-image">
-                        <span>💍</span>
-                    </div>
+                    <img src="/api/placeholder/400/200" alt="Plush Toys" class="category-img">
                     <div class="category-content">
-                        <h3>Anniversaries</h3>
-                        <p>Celebrate love and commitment</p>
+                        <h3>Cuddly Companions<br><span class="emoji">🐻</span></h3>
+                        <p>Huggable friends that provide comfort, love and endless smiles.</p>
+                        <a href="#" class="btn btn-secondary">Explore</a>
                     </div>
                 </div>
                 <div class="category-card">
-                    <div class="category-image">
-                        <span>🏢</span>
-                    </div>
+                    <img src="/api/placeholder/400/200" alt="Adult Gifts" class="category-img">
                     <div class="category-content">
-                        <h3>Corporate</h3>
-                        <p>Impress clients and reward employees</p>
+                        <h3>Grown-Up Fun<br><span class="emoji">🎁</span></h3>
+                        <p>Sophisticated playthings that bring out the child in every adult.</p>
+                        <a href="#" class="btn btn-secondary">Explore</a>
                     </div>
                 </div>
                 <div class="category-card">
-                    <div class="category-image">
-                        <span>🏠</span>
-                    </div>
+                    <img src="/api/placeholder/400/200" alt="Novelty Items" class="category-img">
                     <div class="category-content">
-                        <h3>Housewarming</h3>
-                        <p>Welcome them to their new home</p>
+                        <h3>Conversation Starters<br><span class="emoji">🎪</span></h3>
+                        <p>Quirky and unique toys that spark joy, laughter, and connection.</p>
+                        <a href="#" class="btn btn-secondary">Explore</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="testimonials">
+    <section id="products">
         <div class="container">
             <div class="section-header">
-                <h2>What Our Customers Say</h2>
-                <p>Join thousands of happy gift-givers</p>
+                <h2>Happiness Essentials <span class="emoji">🚀</span></h2>
+                <p>Our handpicked treasures guaranteed to deliver smiles, wonder, and playful moments.</p>
             </div>
-            <div class="testimonials">
+            <div class="products">
+                <div class="product-card">
+                    <img src="/api/placeholder/400/250" alt="Happy Bear" class="product-img">
+                    <div class="product-content">
+                        <h3>Eversmile Teddy</h3>
+                        <div class="product-price">$24.99</div>
+                        <p>This irresistibly soft companion features an enchanting permanent smile that radiates warmth and comfort through any cloudy day.</p>
+                        <a href="#contact" class="btn btn-secondary">Inquire Now</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/400/250" alt="Puzzle Cube" class="product-img">
+                    <div class="product-content">
+                        <h3>Brainwave Puzzle</h3>
+                        <div class="product-price">$19.99</div>
+                        <p>Challenge your spatial thinking with this mesmerizing puzzle that transforms in your hands while stimulating creative problem-solving.</p>
+                        <a href="#contact" class="btn btn-secondary">Inquire Now</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/400/250" alt="Desk Toy" class="product-img">
+                    <div class="product-content">
+                        <h3>Mindful Momentum</h3>
+                        <div class="product-price">$34.99</div>
+                        <p>Transform your workspace with this elegant desk toy that combines captivating motion with stress-relieving properties for mindful breaks.</p>
+                        <a href="#contact" class="btn btn-secondary">Inquire Now</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/api/placeholder/400/250" alt="Plush Unicorn" class="product-img">
+                    <div class="product-content">
+                        <h3>Dream Chaser Unicorn</h3>
+                        <div class="product-price">$29.99</div>
+                        <p>This enchanting unicorn plush features a shimmering rainbow mane and horn that catch light in magical ways, bringing fantasy to life.</p>
+                        <a href="#contact" class="btn btn-secondary">Inquire Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Joy Delivered <span class="emoji">😊</span></h2>
+                <p>Real stories from our community of play enthusiasts who've discovered happiness through Happit.</p>
+            </div>
+            <div class="testimonial-container">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"The presentation was amazing! My sister loved her birthday gift, and I didn't have to worry about a thing."</p>
+                    <div class="testimonial-text">
+                        "The Mindful Momentum desk toy has transformed my workday! It's not just a conversation starter-it's become my daily stress-relief ritual. My entire department now has one!"
+                    </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">S</div>
+                        <img src="/api/placeholder/50/50" alt="Sarah M.">
                         <div>
-                            <h4>Sarah T.</h4>
-                            <p>Verified Customer</p>
+                            <strong>Sarah M.</strong>
+                            <div>Marketing Director</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"Happit saved me when I needed last-minute corporate gifts. The team went above and beyond with personalization."</p>
+                    <div class="testimonial-text">
+                        "The Dream Chaser Unicorn isn't just another plush toy. The quality is exceptional-vibrant colors that haven't faded and stitching that's withstood countless adventures and washes. My daughter takes it everywhere!"
+                    </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">M</div>
+                        <img src="/api/placeholder/50/50" alt="David L.">
                         <div>
-                            <h4>Michael R.</h4>
-                            <p>Marketing Director</p>
+                            <strong>David L.</strong>
+                            <div>Dad of Two</div>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"Their curated gift boxes are thoughtful and unique. It's my go-to for all special occasions now."</p>
+                    <div class="testimonial-text">
+                        "I purchased the Imagination Builders set for my 7-year-old niece, but I've found myself sitting on the floor building alongside her for hours. These blocks have created precious bonding moments I never expected."
+                    </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">J</div>
+                        <img src="/api/placeholder/50/50" alt="Emma K.">
                         <div>
-                            <h4>Jessica K.</h4>
-                            <p>Verified Customer</p>
+                            <strong>Emma K.</strong>
+                            <div>Aunt Extraordinaire</div>
                         </div>
                     </div>
                 </div>
@@ -506,55 +887,294 @@
         </div>
     </section>
 
-    <section id="cta" class="alt">
-        <div class="container" style="text-align: center;">
-            <h2>Ready to Make Someone's Day?</h2>
-            <p style="max-width: 600px; margin: 20px auto 30px;">Let us help you find the perfect gift for your next special occasion.</p>
-            <a href="#" class="button">Browse Gifts</a>
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Playful Journey <span class="emoji">💫</span></h2>
+                <p>The story behind our mission to spark joy through thoughtfully crafted playthings.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 class="mb-2">The Happit Story</h3>
+                    <p class="mb-3">Happit began with a simple question: Why does play have an age limit? Our founder, after watching adults light up while testing toys for their children, realized something profound-the magic of play never truly leaves us.</p>
+                    <p class="mb-3">What started as a tiny collection of "grown-up approved" children's toys has blossomed into a thoughtfully curated wonderland that honors the playful spirit in everyone. We believe that joy shouldn't be confined to childhood, but rather celebrated and nurtured throughout life's journey.</p>
+                    <h3 class="mb-2 mt-4">Our Play Philosophy</h3>
+                    <p>At Happit, we're driven by the belief that playful moments create meaningful connections-to ourselves, to others, and to the wonder-filled world around us. Every product in our collection is thoughtfully selected not just for its ability to entertain, but for its power to inspire joy, creativity, and those magical "aha!" moments that make life brighter.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/500/300" alt="Happit Team">
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer id="contact">
+    <section id="contact" class="contact">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">
-                        <img src="/api/placeholder/150/50" alt="Happit Logo">
+            <div class="section-header">
+                <h2>Let's Connect <span class="emoji">📬</span></h2>
+                <p>Have a question or ready to bring more play into your life? We're here to help you find your perfect joy spark!</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Say Hello!</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Wonder Avenue, Playville, PL 12345</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-PLAY</p>
+                    <p><i class="fas fa-envelope"></i> hello@happit.com</p>
+                    <p><i class="fas fa-clock"></i> Monday - Friday: 9am - 6pm</p>
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
                     </div>
-                    <p>At Happit, we believe that finding the perfect gift should be a joyful experience. Our curated selection makes gifting simple and memorable.</p>
                 </div>
-                <div class="footer-links">
-                    <h4>Shop</h4>
-                    <ul>
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Best Sellers</a></li>
-                        <li><a href="#">Gift Cards</a></li>
-                        <li><a href="#">Corporate Gifts</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Press</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                    </ul>
+                <div class="contact-form">
+                    <form id="inquiryForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">How Can We Help?</label>
+                            <select id="subject" name="subject">
+                                <option value="general">Just Saying Hi!</option>
+                                <option value="product">Product Question</option>
+                                <option value="order">Ready to Order</option>
+                                <option value="wholesale">Wholesale Partnership</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Tell Us More</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Send Message <i class="fas fa-paper-plane"></i></button>
+                    </form>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Happit. All rights reserved.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#products">Products</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
             </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Happit. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize random animations for emoji elements
+            setupEmojiInteractions();
+            
+            // Set up form submission handler
+            setupFormHandler();
+            
+            // Add smooth scrolling for navigation links
+            setupSmoothScrolling();
+            
+            // Add scroll animation effects
+            setupScrollAnimations();
+            
+            // Create floating bubbles throughout the page
+            createBubbles();
+        });
+
+        /**
+         * Setup emoji hover interactions with random animations
+         */
+        function setupEmojiInteractions() {
+            const emojis = document.querySelectorAll('.emoji');
+            
+            // Remove any existing animation classes
+            emojis.forEach(emoji => {
+                emoji.style.animation = 'none';
+            });
+            
+            // Apply hover effects
+            emojis.forEach(emoji => {
+                emoji.addEventListener('mouseover', function() {
+                    // Random selection of effect
+                    const effects = ['spin', 'wobble', 'pulse'];
+                    const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+                    
+                    // Apply the random effect
+                    this.style.animation = `${randomEffect} 0.6s ease`;
+                });
+                
+                emoji.addEventListener('mouseout', function() {
+                    // Remove animation after it completes
+                    this.addEventListener('animationend', function() {
+                        this.style.animation = 'none';
+                    }, {once: true});
+                });
+            });
+        }
+
+        /**
+         * Set up the contact form submission handler
+         */
+        function setupFormHandler() {
+            const inquiryForm = document.getElementById('inquiryForm');
+            
+            if (inquiryForm) {
+                inquiryForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const formValues = {};
+                    
+                    // Convert FormData to regular object
+                    for (let [key, value] of formData.entries()) {
+                        formValues[key] = value;
+                    }
+                    
+                    // Show success message
+                    alert('Thanks for reaching out! We\'re excited to connect with you and will get back to you shortly! 🎉');
+                    
+                    // Reset the form
+                    this.reset();
+                });
+            }
+        }
+
+        /**
+         * Set up smooth scrolling for navigation links
+         */
+        function setupSmoothScrolling() {
+            const navLinks = document.querySelectorAll('.nav-links a, .footer-links a');
+            
+            navLinks.forEach(link => {
+                // Check if the link has a hash
+                if (link.hash) {
+                    link.addEventListener('click', function(e) {
+                        // Get the target element
+                        const targetId = this.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        
+                        // Only prevent default if the target exists on this page
+                        if (targetElement) {
+                            e.preventDefault();
+                            
+                            // Scroll smoothly to the target
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80, // Offset for header
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        /**
+         * Add scroll-triggered animations to elements
+         */
+        function setupScrollAnimations() {
+            // Get all elements that should animate on scroll
+            const animatedElements = document.querySelectorAll('.product-card, .category-card, .testimonial-card');
+            
+            // Create an Intersection Observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Add the visible class when the element is in view
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-on-scroll', 'visible');
+                        // Unobserve after animating to save resources
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+            
+            // Apply the animation-ready class and observe each element
+            animatedElements.forEach((element, index) => {
+                // Add staggered delay based on index
+                element.style.transitionDelay = `${index * 0.1}s`;
+                element.classList.add('animate-on-scroll');
+                observer.observe(element);
+            });
+        }
+        
+        /**
+         * Create floating bubbles throughout the page
+         */
+        function createBubbles() {
+            const bubbleContainer = document.getElementById('bubbleContainer');
+            
+            // Create 20 bubbles with random properties
+            for (let i = 0; i < 20; i++) {
+                createBubble(bubbleContainer);
+            }
+            
+            // Continuously create new bubbles at intervals
+            setInterval(() => {
+                createBubble(bubbleContainer);
+            }, 3000);
+        }
+        
+        /**
+         * Create an individual bubble with random properties
+         */
+        function createBubble(container) {
+            const bubble = document.createElement('div');
+            const size = Math.random() * 30 + 10; // Random size between 10px and 40px
+            
+            // Set bubble style
+            bubble.style.position = 'absolute';
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.borderRadius = '50%';
+            bubble.style.bottom = '0';
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.backgroundColor = getRandomColor();
+            bubble.style.opacity = '0.3';
+            bubble.style.zIndex = '1';
+            
+            // Set animation
+            bubble.style.animation = `float ${Math.random() * 5 + 5}s linear forwards`;
+            
+            // Add to container
+            container.appendChild(bubble);
+            
+            // Remove bubble after animation completes
+            setTimeout(() => {
+                bubble.remove();
+            }, 10000);
+        }
+        
+        /**
+         * Get a random color in the orange theme palette
+         */
+        function getRandomColor() {
+            const colors = [
+                'rgba(255, 122, 89, 0.5)',  // Primary
+                'rgba(255, 154, 130, 0.5)', // Secondary
+                'rgba(255, 223, 215, 0.5)', // Accent
+                'rgba(255, 200, 180, 0.5)'  // Another shade
+            ];
+            
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
 </body>
 </html>
