@@ -801,45 +801,49 @@
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             }
         }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--primary);
+            cursor: pointer;
+          }
+          
+          @media (max-width: 960px) {
+            .mobile-menu-btn {
+              display: block;
+            }
+          }
+          
     </style>
 </head>
 <body>
     <header>
-        <div class="header-bar">
-          <a href="/" class="logo-link" tabindex="0">
-            <img src="assets/images/logo/png_logo.png" alt="Happit Logo" class="logo" />
-            <!-- <span class="logo-text">Happit</span> -->
-          </a>
-            </a>            
-          </a>
-            </a>            
-          </a>
-            </a>            
-          </a>
-            </a>            
-          </a>
-            </a>            
-          </a>
-            </a>            
-          </a>
-            </a>            
-          </a>
-            </a>            
-          </a>
-          <div class="announcement">
-            ✨ Free Shipping on Orders Over $50! ✨
-          </div>
-          <nav>
-            <ul class="nav-links">
-              <li><a href="#">Home</a></li>
-              <li><a href="#categories">Categories</a></li>
-              <li><a href="#products">Products</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+        <header>
+            <div class="header-bar">
+              <a href="/" class="logo-link" tabindex="0">
+                <img src="assets/images/logo/png_logo.png" alt="Happit Logo" class="logo" />
+              </a>
+              <div class="announcement">
+                ✨ Free Shipping on Orders Over $50! ✨
+              </div>
+              <button class="mobile-menu-btn" aria-label="Open navigation" style="display: none;">
+                <i class="fas fa-bars"></i>
+              </button>
+              <nav>
+                <ul class="nav-links">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#categories">Categories</a></li>
+                  <li><a href="#products">Products</a></li>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+          </header>
+          
       
     
 
@@ -1120,6 +1124,14 @@
             
             // Create floating bubbles throughout the page
             createBubbles();
+
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+    });
+  }
         });
 
         /**
