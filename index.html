@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Happit — Joyful toys for kids aged 3–7. Safe, BIS-certified, educational toys sold on Amazon India."/>
+  <title>Happit — Joyful Toys for Little Ones</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/nav.css"/>
+  <link rel="stylesheet" href="css/footer.css"/>
+  <style>
+    /* ── Hero Section ── */
+    .hero {
+      min-height: 92vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 40px;
+      padding: 60px 64px 48px;
+      background: linear-gradient(135deg, #FFF7F4 0%, #FDECEA 45%, #EEE7FA 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-left { position: relative; z-index: 2; }
+    .hero h1 { margin-bottom: 18px; }
+    .hero h1 span { color: var(--coral); }
+    .hero p { font-size: 18px; max-width: 440px; margin-bottom: 32px; line-height: 1.65; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+    .hero-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-stat {
+      background: white; border-radius: 14px;
+      padding: 10px 18px; box-shadow: var(--shadow-sm);
+      font-size: 13px; font-weight: 700; color: var(--text-mid);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-stat strong { font-family: 'Baloo 2', cursive; font-size: 20px; color: var(--coral); }
+
+    /* ── GAME AREA ── */
+    .hero-right { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; }
+    .game-wrap {
+      width: 320px; border-radius: 28px; overflow: hidden;
+      box-shadow: 0 20px 60px rgba(244,115,90,0.18);
+      border: 2px solid rgba(244,115,90,0.15);
+      background: white;
+    }
+    .game-topbar {
+      background: var(--coral); padding: 11px 18px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .game-topbar-title { color: white; font-weight: 800; font-size: 14px; }
+    .game-topbar-score { background: white; color: var(--coral); border-radius: 50px; padding: 3px 14px; font-weight: 900; font-size: 13px; font-family: 'Baloo 2', cursive; }
+    .game-lives { display: flex; gap: 3px; position: absolute; top: 48px; right: 10px; z-index: 5; padding: 4px; }
+    #gameCanvas {
+      position: relative; width: 320px; height: 400px;
+      background: #FFFAF8; overflow: hidden;
+    }
+    #gameBasket {
+      position: absolute; bottom: 12px; width: 72px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px; pointer-events: none; user-select: none;
+      transition: transform 0.15s;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+    }
+    #gameCursor {
+      position: absolute; width: 14px; height: 14px;
+      background: var(--coral); border-radius: 50%;
+      pointer-events: none; transform: translate(-50%,-50%);
+      z-index: 20; display: none;
+      box-shadow: 0 2px 8px rgba(244,115,90,.5);
+    }
+    .game-start {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+      background: rgba(255,250,248,0.97); z-index: 10;
+      text-align: center; padding: 28px;
+    }
+    .game-start-emoji { font-size: 72px; animation: floatAnim 2s ease-in-out infinite; }
+    .game-start h3 { color: var(--text); font-size: 24px; }
+    .game-start p { font-size: 13px; color: var(--text-mid); max-width: 220px; line-height: 1.5; }
+    .game-play-btn {
+      background: var(--coral); color: white; border: none;
+      padding: 14px 32px; border-radius: 50px;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px;
+      cursor: pointer; box-shadow: var(--shadow-coral);
+      transition: all 0.2s; margin-top: 4px;
+    }
+    .game-play-btn:hover { background: var(--coral-dark); transform: scale(1.05); }
+    @keyframes floatAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+    /* ── Clouds ── */
+    .hero-clouds { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+    .cloud { position: absolute; background: white; border-radius: 50px; opacity: 0.5; }
+
+    /* ── Trust Bar ── */
+    .trust-bar {
+      background: white; border-bottom: 1.5px solid var(--border);
+      padding: 18px 32px;
+    }
+    .trust-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .trust-item { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px; color: var(--text-mid); }
+    .trust-item-icon { font-size: 22px; }
+
+    /* ── Categories ── */
+    .categories { background: var(--bg); }
+    .cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+    .cat-card {
+      border-radius: var(--radius-lg); padding: 32px 20px 28px;
+      text-align: center; cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s;
+      text-decoration: none; display: block;
+      border: 1.5px solid transparent;
+    }
+    .cat-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: rgba(244,115,90,0.2); }
+    .cat-icon { font-size: 52px; display: block; margin-bottom: 14px; animation: float 3s ease-in-out infinite; }
+    .cat-card:nth-child(2) .cat-icon { animation-delay: -0.6s; }
+    .cat-card:nth-child(3) .cat-icon { animation-delay: -1.2s; }
+    .cat-card:nth-child(4) .cat-icon { animation-delay: -1.8s; }
+    .cat-card:nth-child(5) .cat-icon { animation-delay: -2.4s; }
+    .cat-card h3 { font-size: 17px; margin-bottom: 8px; }
+    .cat-card p  { font-size: 12px; line-height: 1.5; }
+    .cat-c1 { background: var(--lavender); color: var(--lavender-dark); }
+    .cat-c1 p { color: #8B67C5; }
+    .cat-c2 { background: var(--mint); color: var(--mint-dark); }
+    .cat-c2 p { color: #3DA082; }
+    .cat-c3 { background: var(--yellow); color: var(--yellow-dark); }
+    .cat-c3 p { color: #9A7A00; }
+    .cat-c4 { background: var(--peach); color: #9E3D22; }
+    .cat-c4 p { color: #BE5035; }
+    .cat-c5 { background: var(--sky); color: var(--sky-dark); }
+    .cat-c5 p { color: #2A7FBF; }
+
+    /* ── Products ── */
+    .products { background: white; }
+    .prod-carousel-wrap { position: relative; overflow: hidden; margin: 0 -8px; }
+    #productTrack { display: flex; gap: 24px; transition: transform 0.42s cubic-bezier(.4,0,.2,1); padding: 8px 8px 16px; }
+    .prod-card { flex: 0 0 calc(33.33% - 16px); min-width: 260px; }
+    .prod-img {
+      height: 210px; display: flex; align-items: center; justify-content: center;
+      font-size: 90px; position: relative; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+    .prod-badge-wrap { position: absolute; top: 14px; left: 14px; display: flex; flex-direction: column; gap: 6px; }
+    .prod-body { padding: 22px 24px 24px; }
+    .prod-body h4 { margin-bottom: 6px; }
+    .prod-body p { font-size: 13px; margin-bottom: 14px; line-height: 1.55; }
+    .prod-meta { display: flex; align-items: center; justify-content: space-between; }
+    .prod-price { font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 800; color: var(--coral); }
+    .carousel-nav { display: flex; justify-content: center; gap: 12px; margin-top: 24px; }
+    .carousel-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid var(--border); background: white;
+      font-size: 18px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s; box-shadow: var(--shadow-sm);
+    }
+    .carousel-btn:hover { background: var(--coral); border-color: var(--coral); color: white; }
+
+    /* ── Why Happit ── */
+    .why { background: var(--bg); }
+    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .why-visual {
+      background: linear-gradient(135deg, #FFF0EC, #EDE7F9);
+      border-radius: var(--radius-lg); padding: 48px; text-align: center;
+      font-size: 110px; position: relative; min-height: 360px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-stat {
+      position: absolute; background: white; border-radius: 16px;
+      padding: 14px 20px; box-shadow: var(--shadow-md); font-weight: 800;
+      display: flex; flex-direction: column;
+    }
+    .why-stat .ws-num { font-family: 'Baloo 2', cursive; font-size: 28px; color: var(--coral); }
+    .why-stat .ws-lbl { font-size: 12px; color: var(--text-mid); margin-top: 2px; }
+    .why-stat.s1 { top: 20px; right: -16px; }
+    .why-stat.s2 { bottom: 24px; left: -16px; }
+    .why-features { display: flex; flex-direction: column; gap: 18px; margin-top: 36px; }
+    .why-feat {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px 22px; border-radius: 18px;
+      background: white; border: 1.5px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .why-feat:hover { border-color: var(--coral); transform: translateX(4px); }
+    .why-feat-icon {
+      width: 50px; height: 50px; border-radius: 14px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 26px;
+    }
+    .fi1 { background: var(--lavender); }
+    .fi2 { background: var(--mint); }
+    .fi3 { background: var(--yellow); }
+    .fi4 { background: var(--sky); }
+    .why-feat h4 { font-size: 16px; margin-bottom: 4px; }
+    .why-feat p  { font-size: 13px; line-height: 1.55; }
+
+    /* ── Reviews ── */
+    .reviews { background: white; }
+    .rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+    .rev-card { padding: 28px; }
+    .rev-quote { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin: 12px 0 20px; font-style: italic; }
+    .rev-author { display: flex; align-items: center; gap: 12px; }
+    .rev-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; flex-shrink: 0;
+    }
+    .rev-name { font-weight: 800; font-size: 14px; color: var(--text); }
+    .rev-meta { font-size: 12px; color: var(--text-light); }
+    .rev-source { font-size: 11px; color: var(--text-light); font-weight: 700; margin-top: 3px; }
+    .reviews-cta { text-align: center; margin-top: 44px; }
+    .reviews-aggregate {
+      background: linear-gradient(135deg, #FFF7F4, #EDE7F9);
+      border-radius: var(--radius-lg); padding: 40px;
+      text-align: center; margin-bottom: 52px;
+    }
+    .agg-score { font-family: 'Baloo 2', cursive; font-size: 72px; font-weight: 800; color: var(--coral); line-height: 1; }
+    .agg-sub { color: var(--text-mid); font-size: 15px; margin-top: 8px; }
+
+    /* ── Safety Banner ── */
+    .safety-section {
+      background: linear-gradient(135deg, var(--mint) 0%, var(--sky) 100%);
+      padding: 80px 0; text-align: center;
+    }
+    .safety-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+    .safety-badges { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 44px; }
+    .safety-badge {
+      background: white; border-radius: 20px; padding: 22px 28px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      min-width: 128px; box-shadow: var(--shadow-sm);
+      transition: transform 0.2s;
+    }
+    .safety-badge:hover { transform: translateY(-4px); }
+    .sb-icon { font-size: 36px; }
+    .sb-text { font-weight: 800; font-size: 13px; color: var(--text-mid); text-align: center; }
+
+    /* ── Gift Guide Banner ── */
+    .gift-banner {
+      background: #2D2318; padding: 64px 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .gift-banner h2 { color: white; margin-bottom: 14px; }
+    .gift-banner p { color: #9E8A78; font-size: 17px; max-width: 480px; margin: 0 auto 32px; }
+    .gift-shapes { position: absolute; inset: 0; pointer-events: none; }
+
+    /* ── Newsletter ── */
+    .newsletter { background: var(--bg); padding: 80px 0; text-align: center; }
+    .nl-inner { max-width: 580px; margin: 0 auto; padding: 0 32px; }
+    .nl-inner h2 { margin-bottom: 14px; }
+    .nl-inner p { font-size: 17px; color: var(--text-mid); margin-bottom: 36px; }
+    #nlForm { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+    #nlForm input {
+      flex: 1; padding: 14px 22px; border-radius: var(--radius-pill);
+      border: 2px solid var(--border); background: white;
+      font-family: 'Nunito', sans-serif; font-size: 14px; outline: none;
+      transition: border-color 0.2s;
+    }
+    #nlForm input:focus { border-color: var(--coral); }
+    #nlForm button {
+      padding: 14px 24px; border-radius: var(--radius-pill);
+      background: var(--coral); color: white; border: none;
+      font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px;
+      cursor: pointer; transition: background 0.2s; white-space: nowrap;
+    }
+    #nlForm button:hover { background: var(--coral-dark); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .cat-grid { grid-template-columns: repeat(3,1fr); }
+      .hero { padding: 48px 32px; }
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 40px 24px; }
+      .hero p { max-width: 100%; }
+      .why-inner { grid-template-columns: 1fr; }
+      .why-visual { min-height: 280px; }
+      .rev-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .cat-grid { grid-template-columns: repeat(2,1fr); }
+      #productTrack .prod-card { flex: 0 0 calc(100% - 16px); }
+    }
+    @media (max-width: 500px) {
+      #nlForm { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ═══════════════════════════════════ HERO ═══ -->
+<section class="hero">
+  <div class="hero-clouds" id="heroCloudsBg"></div>
+
+  <div class="hero-left">
+    <div class="badge badge-mint" style="margin-bottom:20px">🌟 Loved by 10,000+ Little Ones</div>
+    <h1>Play. Laugh.<br><span>Grow Together.</span></h1>
+    <p>Happit makes joyful toys that spark imagination, boost creativity, and bring big smiles — crafted with love for kids aged 3 to 7.</p>
+    <div class="hero-btns">
+      <a href="https://www.amazon.in/s?k=happit" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Shop All Toys 🎁</a>
+      <a href="pages/about.html" class="btn btn-secondary">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>10K+</strong> Happy Kids</div>
+      <div class="hero-stat"><strong>4.8★</strong> Rated</div>
+      <div class="hero-stat"><strong>BIS</strong> Certified</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="game-wrap">
+      <div class="game-topbar">
+        <span class="game-topbar-title">🎮 Catch the Toys!</span>
+        <span class="game-topbar-score" id="gameScore">0 pts</span>
+      </div>
+      <div style="position:relative">
+        <div class="game-lives" id="gameLives"></div>
+        <div id="gameCanvas">
+          <div id="gameCursor"></div>
+          <div id="gameBasket">🧺</div>
+          <div class="game-start" id="gameStart">
+            <div class="game-start-emoji">🧸</div>
+            <h3>Catch the Toys!</h3>
+            <p>Move your mouse or finger to catch falling toys. Don't miss 3!</p>
+            <button class="game-play-btn" onclick="window.happitGame.start()">Let's Play! 🎉</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ TRUST BAR ═══ -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><span class="trust-item-icon">🔒</span> Safe &amp; Non-toxic</div>
+    <div class="trust-item"><span class="trust-item-icon">🏅</span> BIS Certified</div>
+    <div class="trust-item"><span class="trust-item-icon">🚚</span> Fast Delivery via Amazon</div>
+    <div class="trust-item"><span class="trust-item-icon">↩️</span> Easy Amazon Returns</div>
+    <div class="trust-item"><span class="trust-item-icon">🇮🇳</span> Made in India</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ CATEGORIES ═══ -->
+<section class="section categories">
+  <div class="container">
+    <div class="section-header center">
+      <div class="label">Explore by Category</div>
+      <h2>Something for Every Little Explorer</h2>
+    </div>
+    <div class="cat-grid">
+      <a class="cat-card cat-c1" href="pages/categories.html#puzzles">
+        <span class="cat-icon">🧩</span>
+        <h3>Puzzles</h3>
+        <p>Brain-boosting fun for curious minds</p>
+      </a>
+      <a class="cat-card cat-c2" href="pages/categories.html#arts">
+        <span class="cat-icon">🎨</span>
+        <h3>Arts &amp; Crafts</h3>
+        <p>Let creativity run wild</p>
+      </a>
+      <a class="cat-card cat-c3" href="pages/categories.html#learning">
+        <span class="cat-icon">📚</span>
+        <h3>Learning Games</h3>
+        <p>Play smart, grow smarter</p>
+      </a>
+      <a class="cat-card cat-c4" href="pages/categories.html#sensory">
+        <span class="cat-icon">🪀</span>
+        <h3>Sensory Toys</h3>
+        <p>Touch, feel and discover</p>
+      </a>
+      <a class="cat-card cat-c5" href="pages/categories.html#activity">
+        <span class="cat-icon">🎯</span>
+        <h3>Activity Kits</h3>
+        <p>Bundles of joy &amp; learning</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ PRODUCTS ═══ -->
+<section class="section products">
+  <div class="container">
+    <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
+      <div>
+        <div class="label">Our Bestsellers</div>
+        <h2>Top Picks for Happy Kids</h2>
+      </div>
+      <a href="pages/categories.html" class="btn btn-secondary">View All Toys →</a>
+    </div>
+    <div class="prod-carousel-wrap">
+      <div id="productTrack">
+
+        <div class="card prod-card">
+          <div class="prod-img" style="background:#EDE7F9">
+            <div class="prod-badge-wrap"><span class="badge badge-coral">🔥 Bestseller</span></div>
+            🧩
+          </div>
+          <div class="prod-body">
+            <h4>Rainbow Puzzle Set</h4>
+            <p>Colourful 48-piece puzzle that builds problem-solving skills for kids 3+</p>
+            <div class="prod-meta">
+              <div>
+                <div class="stars">★★★★★</div>
+                <span class="stars-count">(328 reviews)</span>
+              </div>
+              <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card prod-card">
+          <div class="prod-img" style="background:#D4F0E8">
+            <div class="prod-badge-wrap"><span class="badge badge-mint">✨ New Arrival</span></div>
+            🎨
+          </div>
+          <div class="prod-body">
+            <h4>Doodle &amp; Play Kit</h4>
+            <p>All-in-one art kit with washable paints, brushes &amp; craft paper — mess-free magic!</p>
+            <div class="prod-meta">
+              <div>
+                <div class="stars">★★★★★</div>
+                <span class="stars-count">(195 reviews)</span>
+              </div>
+              <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card prod-card">
+          <div class="prod-img" style="background:#FFF3CC">
+            🎲
+          </div>
+          <div class="prod-body">
+            <h4>ABC Fun Game</h4>
+            <p>Interactive alphabet game that makes learning letters and phonics genuinely fun</p>
+            <div class="prod-meta">
+              <div>
+                <div class="stars">★★★★★</div>
+                <span class="stars-count">(412 reviews)</span>
+              </div>
+              <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card prod-card">
+          <div class="prod-img" style="background:#D9EEFF">
+            <div class="prod-badge-wrap"><span class="badge badge-lavender">🎁 Gift Fave</span></div>
+            🪀
+          </div>
+          <div class="prod-body">
+            <h4>Sensory Fidget Bundle</h4>
+            <p>Calming sensory toys perfect for focus, relaxation and fine motor development</p>
+            <div class="prod-meta">
+              <div>
+                <div class="stars">★★★★☆</div>
+                <span class="stars-count">(261 reviews)</span>
+              </div>
+              <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card prod-card">
+          <div class="prod-img" style="background:#FDECEA">
+            🎯
+          </div>
+          <div class="prod-body">
+            <h4>Explorer Activity Kit</h4>
+            <p>Science + craft adventure kit — grow crystals, build bridges, go exploring!</p>
+            <div class="prod-meta">
+              <div>
+                <div class="stars">★★★★★</div>
+                <span class="stars-count">(187 reviews)</span>
+              </div>
+              <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy on Amazon</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="prodPrev">←</button>
+      <button class="carousel-btn" id="prodNext">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ WHY ═══ -->
+<section class="section why">
+  <div class="container">
+    <div class="why-inner">
+      <div>
+        <div class="label">Why Happit</div>
+        <h2>Made with Heart,<br>Played with Joy</h2>
+        <p style="font-size:17px;margin-top:12px;margin-bottom:0">Every Happit toy is designed to make playtime richer, learning more joyful, and childhood truly unforgettable.</p>
+        <div class="why-features">
+          <div class="why-feat">
+            <div class="why-feat-icon fi1">🛡️</div>
+            <div>
+              <h4>Safety First, Always</h4>
+              <p>All materials are BIS certified, non-toxic &amp; child-tested. Peace of mind, guaranteed.</p>
+            </div>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-icon fi2">🎓</div>
+            <div>
+              <h4>Edu-Play Design</h4>
+              <p>Every product is designed by child development experts to balance fun &amp; learning beautifully.</p>
+            </div>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-icon fi3">💛</div>
+            <div>
+              <h4>Parent Approved</h4>
+              <p>Over 10,000 happy families across India trust Happit. Loved, gifted &amp; re-ordered.</p>
+            </div>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-icon fi4">🌱</div>
+            <div>
+              <h4>Eco-Conscious</h4>
+              <p>Sustainable packaging and responsible materials — because little ones deserve a green future.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="why-visual anim-float">
+          🌈
+          <div class="why-stat s1">
+            <span class="ws-num">10K+</span>
+            <span class="ws-lbl">Happy Families</span>
+          </div>
+          <div class="why-stat s2">
+            <span class="ws-num">4.8★</span>
+            <span class="ws-lbl">Avg. Rating</span>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:24px">
+          <a href="pages/about.html" class="btn btn-secondary">Our Story →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ REVIEWS ═══ -->
+<section class="section reviews">
+  <div class="container">
+    <div class="section-header center">
+      <div class="label">Parent Love</div>
+      <h2>What Families Are Saying</h2>
+    </div>
+    <div class="reviews-aggregate">
+      <div class="agg-score">4.8</div>
+      <div class="stars" style="font-size:28px">★★★★★</div>
+      <div class="agg-sub">Based on 1,200+ verified Amazon reviews</div>
+    </div>
+    <div class="rev-grid">
+      <div class="card rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote">"My daughter absolutely LOVES the puzzle set. She spent 2 hours doing it and asked to do it again the next day. Worth every rupee!"</p>
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#EDE7F9;color:#7B4FCF">P</div>
+          <div>
+            <div class="rev-name">Priya S.</div>
+            <div class="rev-meta">Mumbai · Verified Purchase</div>
+            <div class="rev-source">via Amazon India</div>
+          </div>
+        </div>
+      </div>
+      <div class="card rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote">"The art kit is a game changer for us. No mess, bright colours and my son is always asking to paint. Great quality for the price!"</p>
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#D4F0E8;color:#2D8C70">R</div>
+          <div>
+            <div class="rev-name">Rahul M.</div>
+            <div class="rev-meta">Bengaluru · Verified Purchase</div>
+            <div class="rev-source">via Amazon India</div>
+          </div>
+        </div>
+      </div>
+      <div class="card rev-card">
+        <div class="stars">★★★★★</div>
+        <p class="rev-quote">"Gifted the ABC game to my nephew for his birthday. His parents say he's already learned 15 letters in two weeks. Incredible results!"</p>
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#FFF3CC;color:#B8930A">A</div>
+          <div>
+            <div class="rev-name">Anjali K.</div>
+            <div class="rev-meta">Delhi · Verified Purchase</div>
+            <div class="rev-source">via Amazon India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-cta">
+      <a href="pages/reviews.html" class="btn btn-secondary">Read More Reviews →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SAFETY ═══ -->
+<section class="safety-section">
+  <div class="safety-inner">
+    <div class="label">Safety &amp; Quality</div>
+    <h2>Play Safe, Always</h2>
+    <p style="font-size:17px;color:#2D5B4A;margin-top:12px">Every Happit product goes through rigorous testing so you can let little ones play freely.</p>
+    <div class="safety-badges">
+      <div class="safety-badge"><span class="sb-icon">🏅</span><span class="sb-text">BIS Certified</span></div>
+      <div class="safety-badge"><span class="sb-icon">🌿</span><span class="sb-text">Non-toxic Materials</span></div>
+      <div class="safety-badge"><span class="sb-icon">🔬</span><span class="sb-text">Lab Tested</span></div>
+      <div class="safety-badge"><span class="sb-icon">♻️</span><span class="sb-text">Eco Packaging</span></div>
+      <div class="safety-badge"><span class="sb-icon">👶</span><span class="sb-text">Age Appropriate</span></div>
+    </div>
+    <div style="margin-top:40px">
+      <a href="pages/safety.html" class="btn btn-primary">Learn About Our Safety →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ GIFT GUIDE BANNER ═══ -->
+<section class="gift-banner">
+  <div class="container" style="position:relative;z-index:2">
+    <h2>🎁 Not Sure What to Gift?</h2>
+    <p>Let us help you find the perfect toy for your little one's age, interest, and personality.</p>
+    <a href="pages/categories.html" class="btn btn-primary btn-lg">Explore the Gift Guide</a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ NEWSLETTER ═══ -->
+<section class="newsletter">
+  <div class="nl-inner">
+    <div class="label">Stay in the Loop</div>
+    <h2>Get Play Ideas &amp; Exclusive Offers 🎉</h2>
+    <p>Join 5,000+ parents who get fun activity ideas, parenting tips &amp; first dibs on new Happit toys.</p>
+    <form id="nlForm">
+      <input type="email" placeholder="your@email.com" required/>
+      <button type="submit">Subscribe ✨</button>
+    </form>
+    <p style="font-size:12px;color:var(--text-light);margin-top:14px">No spam, ever. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<!-- ── Floating clouds ── -->
+<script>
+  const cb = document.getElementById('heroCloudsBg');
+  if (cb) {
+    const sizes = [80,120,100,70,140,90];
+    sizes.forEach((w, i) => {
+      const c = document.createElement('div');
+      c.className = 'cloud';
+      Object.assign(c.style, {
+        width: w + 'px', height: (w * 0.45) + 'px',
+        top: (8 + i * 14) + '%',
+        left: (-w + Math.random() * (100 + w)) + '%',
+        animation: `cloudDrift ${16 + i * 4}s linear ${-i * 3}s infinite`
+      });
+      cb.appendChild(c);
+    });
+  }
+</script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
