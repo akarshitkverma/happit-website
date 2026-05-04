@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reviews — Happit</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <style>
+    .page-hero { background:linear-gradient(135deg,#FFF4F0,#FDECEA 50%,#EEE7FA); padding:70px 0 56px; text-align:center; }
+    .agg-section { padding:56px 0; background:white; }
+    .agg-inner { display:grid; grid-template-columns:1fr 2fr; gap:48px; align-items:center; }
+    .agg-score-big { text-align:center; }
+    .agg-num { font-family:'Baloo 2',cursive; font-size:88px; font-weight:800; color:var(--coral); line-height:1; }
+    .agg-stars { font-size:32px; color:#F5C842; margin:8px 0; }
+    .agg-count { font-size:14px; color:var(--text-light); font-weight:700; }
+    .rating-bars { display:flex; flex-direction:column; gap:10px; }
+    .rbar { display:flex; align-items:center; gap:12px; }
+    .rbar-label { font-size:13px; font-weight:700; color:var(--text-mid); width:48px; }
+    .rbar-track { flex:1; height:10px; background:var(--border); border-radius:10px; overflow:hidden; }
+    .rbar-fill { height:100%; background:var(--coral); border-radius:10px; transition:width 1s ease; }
+    .rbar-count { font-size:13px; font-weight:700; color:var(--text-light); width:40px; text-align:right; }
+    /* Reviews grid */
+    .reviews-section { padding:72px 0; background:var(--bg); }
+    .rev-controls { display:flex; gap:12px; margin-bottom:36px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+    .rev-filter { display:flex; gap:8px; flex-wrap:wrap; }
+    .rev-chip { padding:7px 18px; border-radius:var(--radius-pill); border:1.5px solid var(--border); font-size:13px; font-weight:700; cursor:pointer; background:white; color:var(--text-mid); transition:all .2s; }
+    .rev-chip:hover,.rev-chip.active { background:var(--coral); color:white; border-color:var(--coral); }
+    .rev-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+    .rev-card { padding:28px; background:white; border-radius:var(--radius-lg); border:1.5px solid var(--border); transition:transform .2s; }
+    .rev-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+    .rev-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+    .rev-product { font-size:11px; font-weight:800; color:var(--coral); letter-spacing:.5px; text-transform:uppercase; }
+    .rev-body { font-size:14px; color:var(--text-mid); line-height:1.7; margin:10px 0 18px; font-style:italic; }
+    .rev-author { display:flex; align-items:center; gap:12px; }
+    .rev-av { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px; flex-shrink:0; }
+    .rev-name { font-weight:800; font-size:14px; }
+    .rev-loc { font-size:12px; color:var(--text-light); }
+    /* Amazon CTA */
+    .amazon-cta { background:var(--yellow); padding:64px 0; text-align:center; }
+    .amazon-cta h2 { color:var(--yellow-dark); margin-bottom:14px; }
+    .amazon-cta p { color:#7A5F00; max-width:440px; margin:0 auto 28px; }
+    @media(max-width:900px){ .agg-inner{grid-template-columns:1fr}; .rev-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:600px){ .rev-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-hero">
+  <div class="container">
+    <div class="label">Parent Reviews</div>
+    <h1>What Families Are Saying ⭐</h1>
+    <p>Over 1,200 verified reviews from happy parents across India on Amazon.</p>
+  </div>
+</div>
+
+<section class="agg-section">
+  <div class="container">
+    <div class="agg-inner">
+      <div class="agg-score-big">
+        <div class="agg-num">4.8</div>
+        <div class="agg-stars">★★★★★</div>
+        <div class="agg-count">1,246 verified reviews</div>
+        <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon" style="margin-top:20px" target="_blank" rel="noopener">See All on Amazon 🛒</a>
+      </div>
+      <div class="rating-bars">
+        <div class="rbar"><span class="rbar-label">5 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:78%"></div></div><span class="rbar-count">971</span></div>
+        <div class="rbar"><span class="rbar-label">4 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:14%"></div></div><span class="rbar-count">175</span></div>
+        <div class="rbar"><span class="rbar-label">3 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:5%"></div></div><span class="rbar-count">62</span></div>
+        <div class="rbar"><span class="rbar-label">2 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:2%"></div></div><span class="rbar-count">25</span></div>
+        <div class="rbar"><span class="rbar-label">1 ★</span><div class="rbar-track"><div class="rbar-fill" style="width:1%"></div></div><span class="rbar-count">13</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section">
+  <div class="container">
+    <div class="rev-controls">
+      <div class="rev-filter">
+        <span class="rev-chip active" onclick="setFilter(this,'all')">All Reviews</span>
+        <span class="rev-chip" onclick="setFilter(this,'5')">5 Stars</span>
+        <span class="rev-chip" onclick="setFilter(this,'4')">4 Stars</span>
+        <span class="rev-chip" onclick="setFilter(this,'puzzles')">Puzzles</span>
+        <span class="rev-chip" onclick="setFilter(this,'arts')">Arts &amp; Crafts</span>
+        <span class="rev-chip" onclick="setFilter(this,'learning')">Learning</span>
+      </div>
+    </div>
+    <div class="rev-grid" id="reviewGrid">
+      <div class="rev-card" data-stars="5" data-product="puzzles">
+        <div class="rev-top"><span class="rev-product">Rainbow Puzzle Set</span><span class="stars" style="font-size:15px">★★★★★</span></div>
+        <p class="rev-body">"My daughter LOVES this puzzle set. She spent 2 hours doing it and asked to do it again the next day. Quality is excellent — pieces are thick, colours are vibrant, and it all fits perfectly. Worth every rupee!"</p>
+        <div class="rev-author"><div class="rev-av" style="background:#EDE7F9;color:#7B4FCF">P</div><div><div class="rev-name">Priya S.</div><div class="rev-loc">Mumbai · Verified Purchase</div></div></div>
+      </div>
+      <div class="rev-card" data-stars="5" data-product="arts">
+        <div class="rev-top"><span class="rev-product">Doodle &amp; Play Kit</span><span class="stars" style="font-size:15px">★★★★★</span></div>
+        <p class="rev-body">"The art kit is a game changer. No mess at all, the washable claim is 100% true, bright colours and my son is always asking to paint. Great quality for the price — highly recommend for any parent!"</p>
+        <div class="rev-author"><div class="rev-av" style="background:#D4F0E8;color:#2D8C70">R</div><div><div class="rev-name">Rahul M.</div><div class="rev-loc">Bengaluru · Verified Purchase</div></div></div>
+      </div>
+      <div class="rev-card" data-stars="5" data-product="learning">
+        <div class="rev-top"><span class="rev-product">ABC Fun Game</span><span class="stars" style="font-size:15px">★★★★★</span></div>
+        <p class="rev-body">"Gifted this to my nephew for his birthday. His parents messaged saying he's already learned 15 letters in two weeks! The game is so engaging that he doesn't even realise he's learning. Incredible product."</p>
+        <div class="rev-author"><div class="rev-av" style="background:#FFF3CC;color:#B8930A">A</div><div><div class="rev-name">Anjali K.</div><div class="rev-loc">Delhi · Verified Purchase</div></div></div>
+      </div>
+      <div class="rev-card" data-stars="5" data-product="sensory">
+        <div class="rev-top"><span class="rev-product">Sensory Fidget Bundle</span><span class="stars" style="font-size:15px">★★★★★</span></div>
+        <p class="rev-body">"My son has sensory processing issues and this bundle has been life-changing. He's calmer, more focused at school, and actually enjoys his calm-down time now. Excellent quality and fast Amazon delivery!"</p>
+        <div class="rev-author"><div class="rev-av" style="background:#D9EEFF;color:#1A6BB5">S</div><div><div class="rev-name">Sunita R.</div><div class="rev-loc">Pune · Verified Purchase</div></div></div>
+      </div>
+      <div class="rev-card" data-stars="4" data-product="puzzles">
+        <div class="rev-top"><span class="rev-product">World Map Puzzle</span><span class="stars" style="font-size:15px">★★★★☆</span></div>
+        <p class="rev-body">"Really good quality puzzle and my kids have learned so much geography from it. Took off one star only because the box is a bit small for storing once assembled, but the puzzle itself is great!"</p>
+        <div class="rev-author"><div class="rev-av" style="background:#EDE7F9;color:#7B4FCF">V</div><div><div class="rev-name">Vikram P.</div><div class="rev-loc">Chennai · Verified Purchase</div></div></div>
+      </div>
+      <div class="rev-card" data-stars="5" data-product="activity">
+        <div class="rev-top"><span class="rev-product">Explorer Activity Kit</span><span class="stars" style="font-size:15px">★★★★★</span></div>
+        <p class="rev-body">"The crystal growing experiment blew my 6-year-old's mind. She spent an entire weekend on just that one experiment. The kit comes with everything you need — instructions are clear and kid-friendly. Brilliant gift idea!"</p>
+        <div class="rev-author"><div class="rev-av" style="background:#D4F0E8;color:#2D8C70">M</div><div><div class="rev-name">Meera J.</div><div class="rev-loc">Hyderabad · Verified Purchase</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="amazon-cta">
+  <div class="container">
+    <h2>Read All 1,200+ Reviews on Amazon</h2>
+    <p>We're proud of our track record. See every verified review on our Amazon store.</p>
+    <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-lg" target="_blank" rel="noopener">View on Amazon 🛒</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script>
+function setFilter(chip, filter) {
+  document.querySelectorAll('.rev-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  document.querySelectorAll('.rev-card').forEach(card => {
+    const show = filter === 'all' || card.dataset.stars === filter || card.dataset.product === filter;
+    card.style.display = show ? '' : 'none';
+  });
+}
+</script>
+<script src="../js/components.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{document.querySelector('.nav-logo')?.setAttribute('href','../index.html');document.querySelectorAll('.nav-links a,.mobile-menu a').forEach(a=>{const h=a.getAttribute('href');if(h&&h.startsWith('pages/'))a.setAttribute('href',h.replace('pages/',''));});},50);});</script>
+</body>
+</html>

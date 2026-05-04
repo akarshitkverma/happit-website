@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us — Happit</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <style>
+    .page-hero { background:linear-gradient(135deg,#FFF4F0,#FDECEA 50%,#EEE7FA); padding:70px 0 56px; text-align:center; }
+    .contact-section { padding:88px 0; background:white; }
+    .contact-inner { display:grid; grid-template-columns:1fr 1.5fr; gap:72px; align-items:start; }
+    /* Info side */
+    .contact-info h3 { font-size:22px; margin-bottom:16px; }
+    .contact-info p { font-size:15px; color:var(--text-mid); line-height:1.7; margin-bottom:32px; }
+    .contact-methods { display:flex; flex-direction:column; gap:16px; margin-bottom:36px; }
+    .cm { display:flex; align-items:flex-start; gap:16px; padding:20px; border-radius:var(--radius-md); border:1.5px solid var(--border); background:var(--bg); transition:border-color .2s; }
+    .cm:hover { border-color:var(--coral); }
+    .cm-icon { font-size:28px; flex-shrink:0; }
+    .cm-label { font-size:12px; font-weight:800; color:var(--text-light); text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+    .cm-val { font-size:15px; font-weight:700; color:var(--text); }
+    .cm-val a { color:var(--coral); text-decoration:none; }
+    .cm-sub { font-size:12px; color:var(--text-light); margin-top:3px; }
+    .social-row { display:flex; gap:12px; }
+    .social-pill { display:flex; align-items:center; gap:8px; padding:9px 18px; border-radius:var(--radius-pill); border:1.5px solid var(--border); font-size:13px; font-weight:700; color:var(--text-mid); text-decoration:none; transition:all .2s; }
+    .social-pill:hover { border-color:var(--coral); color:var(--coral); background:var(--coral-light); }
+    /* Form side */
+    .contact-form-wrap { background:var(--bg); border-radius:var(--radius-lg); padding:40px; border:1.5px solid var(--border); }
+    .contact-form-wrap h3 { font-size:22px; margin-bottom:28px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .field { margin-bottom:20px; }
+    .field label { display:block; font-size:13px; font-weight:800; color:var(--text-mid); margin-bottom:7px; }
+    .field input, .field select, .field textarea {
+      width:100%; padding:13px 18px; border-radius:var(--radius-sm);
+      border:1.5px solid var(--border); background:white;
+      font-family:'Nunito',sans-serif; font-size:14px; color:var(--text);
+      outline:none; transition:border-color .2s;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--coral); }
+    .field textarea { resize:vertical; min-height:120px; }
+    .field select { cursor:pointer; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; }
+    .submit-btn { width:100%; padding:16px; background:var(--coral); color:white; border:none; border-radius:var(--radius-pill); font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; cursor:pointer; transition:all .2s; }
+    .submit-btn:hover { background:var(--coral-dark); transform:translateY(-2px); box-shadow:var(--shadow-coral); }
+    .form-success { display:none; text-align:center; padding:32px; }
+    .form-success .success-icon { font-size:64px; margin-bottom:16px; animation:floatAnim 2s ease-in-out infinite; }
+    @keyframes floatAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    /* Bulk CTA */
+    .bulk-cta { background:linear-gradient(135deg,var(--mint),var(--sky)); padding:72px 0; text-align:center; }
+    .bulk-cta h2 { color:#1A5E48; margin-bottom:14px; }
+    .bulk-cta p { color:#1E5A4A; max-width:480px; margin:0 auto 32px; font-size:17px; }
+    @media(max-width:900px){ .contact-inner{grid-template-columns:1fr;} .form-row{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-hero">
+  <div class="container">
+    <div class="label">Get in Touch</div>
+    <h1>We'd Love to Hear From You 💌</h1>
+    <p>Questions, feedback, bulk orders or just want to say hi — we're always happy to chat.</p>
+  </div>
+</div>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <h3>How can we help?</h3>
+        <p>Whether you need a product recommendation, have a safety question, or want to place a bulk order — our friendly team is here. We typically respond within 24 hours on weekdays.</p>
+        <div class="contact-methods">
+          <div class="cm">
+            <span class="cm-icon">📧</span>
+            <div>
+              <div class="cm-label">Email</div>
+              <div class="cm-val"><a href="mailto:hello@happit.in">hello@happit.in</a></div>
+              <div class="cm-sub">We reply within 24 hours</div>
+            </div>
+          </div>
+          <div class="cm">
+            <span class="cm-icon">🛒</span>
+            <div>
+              <div class="cm-label">Amazon Store</div>
+              <div class="cm-val"><a href="https://www.amazon.in/s?k=happit" target="_blank">amazon.in/happit</a></div>
+              <div class="cm-sub">All products &amp; official reviews</div>
+            </div>
+          </div>
+          <div class="cm">
+            <span class="cm-icon">📍</span>
+            <div>
+              <div class="cm-label">Based In</div>
+              <div class="cm-val">Gurugram, Haryana, India</div>
+              <div class="cm-sub">Serving all of India via Amazon</div>
+            </div>
+          </div>
+          <div class="cm">
+            <span class="cm-icon">⏰</span>
+            <div>
+              <div class="cm-label">Support Hours</div>
+              <div class="cm-val">Mon – Sat, 9am – 6pm IST</div>
+              <div class="cm-sub">Closed on national holidays</div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:14px;font-weight:700;color:var(--text-mid);margin-bottom:12px">Follow us for play ideas &amp; new toys:</p>
+        <div class="social-row">
+          <a class="social-pill" href="#" target="_blank">📸 Instagram</a>
+          <a class="social-pill" href="#" target="_blank">💙 Facebook</a>
+          <a class="social-pill" href="#" target="_blank">▶️ YouTube</a>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <h3>Send us a message</h3>
+        <div id="contactForm">
+          <div class="form-row">
+            <div class="field"><label>First Name *</label><input type="text" placeholder="Priya" required/></div>
+            <div class="field"><label>Last Name *</label><input type="text" placeholder="Sharma" required/></div>
+          </div>
+          <div class="field"><label>Email Address *</label><input type="email" placeholder="priya@email.com" required/></div>
+          <div class="field"><label>Phone (optional)</label><input type="tel" placeholder="+91 98xxx xxxxx"/></div>
+          <div class="field">
+            <label>Subject *</label>
+            <select required>
+              <option value="">Select a topic...</option>
+              <option>Product recommendation</option>
+              <option>Order &amp; delivery</option>
+              <option>Returns &amp; refunds</option>
+              <option>Safety question</option>
+              <option>Bulk / wholesale order</option>
+              <option>Press &amp; media</option>
+              <option>Partnership</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field"><label>Message *</label><textarea placeholder="Tell us how we can help..." required></textarea></div>
+          <button class="submit-btn" onclick="submitForm(event)">Send Message 💌</button>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">🎉</div>
+          <h3>Message sent!</h3>
+          <p style="color:var(--text-mid);margin-top:10px">Thanks for reaching out! We'll get back to you within 24 hours. In the meantime, feel free to explore our toys on Amazon!</p>
+          <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon" style="margin-top:20px" target="_blank" rel="noopener">Browse Happit on Amazon 🛒</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bulk-cta">
+  <div class="container">
+    <h2>🎁 Bulk Orders &amp; Gifting</h2>
+    <p>Planning a school event, birthday party or corporate gift? We offer special pricing and branded packaging for bulk orders of 20+ units.</p>
+    <a href="mailto:hello@happit.in?subject=Bulk Order Enquiry" class="btn btn-primary">Email Us for Bulk Pricing</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script>
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+</script>
+<script src="../js/components.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{document.querySelector('.nav-logo')?.setAttribute('href','../index.html');document.querySelectorAll('.nav-links a,.mobile-menu a').forEach(a=>{const h=a.getAttribute('href');if(h&&h.startsWith('pages/'))a.setAttribute('href',h.replace('pages/',''));});},50);});</script>
+</body>
+</html>

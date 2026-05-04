@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Browse Happit toy categories — Puzzles, Arts & Crafts, Learning Games, Sensory Toys and Activity Kits for kids 3–7."/>
+  <title>All Toys — Happit</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <style>
+    /* fix nav links for pages/ subfolder */
+    .nav-links a, .mobile-menu a, .footer-col a { }
+
+    .page-hero { padding: 70px 0 56px; text-align: center;
+      background: linear-gradient(135deg, #FFF4F0, #FDECEA 50%, #EEE7FA); }
+
+    /* Filter tabs */
+    .filter-bar { background: white; border-bottom: 1.5px solid var(--border); position: sticky; top: 68px; z-index: 100; }
+    .filter-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px;
+      display: flex; align-items: center; gap: 10px; overflow-x: auto; padding-bottom: 0;
+      scrollbar-width: none; }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      padding: 14px 22px; border: none; background: none; cursor: pointer;
+      font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 14px;
+      color: var(--text-mid); border-bottom: 3px solid transparent;
+      white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
+    }
+    .filter-btn:hover { color: var(--coral); }
+    .filter-btn.active { color: var(--coral); border-bottom-color: var(--coral); }
+
+    /* Category sections */
+    .cat-section { padding: 72px 0; }
+    .cat-section:nth-child(even) { background: white; }
+    .cat-section:nth-child(odd)  { background: var(--bg); }
+
+    .cat-section-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 16px; margin-bottom: 40px;
+    }
+    .cat-section-emoji { font-size: 52px; margin-bottom: 10px; display: block; }
+    .cat-section-header h2 { margin-bottom: 8px; }
+    .cat-section-header p { font-size: 15px; color: var(--text-mid); max-width: 400px; }
+
+    /* Products grid */
+    .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .prod-card { }
+    .prod-img  { height: 190px; display: flex; align-items: center; justify-content: center;
+      font-size: 80px; position: relative; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+    .prod-badge-abs { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 5px; }
+    .prod-body { padding: 18px 20px 22px; }
+    .prod-body h4 { font-size: 17px; margin-bottom: 5px; }
+    .prod-body .prod-desc { font-size: 13px; line-height: 1.55; margin-bottom: 12px; color: var(--text-mid); }
+    .prod-age { font-size: 11px; font-weight: 800; color: var(--text-light); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+    .prod-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1.5px solid var(--border); }
+    .prod-stars-row { }
+
+    /* Age filter chips */
+    .age-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .age-chip {
+      padding: 6px 16px; border-radius: var(--radius-pill); border: 1.5px solid var(--border);
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+      background: white; color: var(--text-mid);
+    }
+    .age-chip:hover, .age-chip.active { background: var(--coral); color: white; border-color: var(--coral); }
+
+    /* Gift Guide CTA */
+    .gift-cta {
+      background: linear-gradient(135deg, #FFF0EC, #EDE7F9);
+      border-radius: var(--radius-lg); padding: 48px; text-align: center; margin-top: 56px;
+    }
+    .gift-cta h3 { font-size: 28px; margin-bottom: 12px; }
+    .gift-cta p { font-size: 15px; color: var(--text-mid); max-width: 420px; margin: 0 auto 28px; }
+
+    @media (max-width: 1024px) { .prod-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 768px)  { .prod-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 480px)  { .prod-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- Hero -->
+<div class="page-hero">
+  <div class="container">
+    <div class="label">All Toys</div>
+    <h1>Explore the Happit World 🌈</h1>
+    <p>Discover toys that make every moment of play magical — safe, educational, and genuinely fun for kids aged 3–7.</p>
+  </div>
+</div>
+
+<!-- Filter Bar -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="filterCat('all',this)">All Toys</button>
+    <button class="filter-btn" onclick="filterCat('puzzles',this)">🧩 Puzzles</button>
+    <button class="filter-btn" onclick="filterCat('arts',this)">🎨 Arts &amp; Crafts</button>
+    <button class="filter-btn" onclick="filterCat('learning',this)">📚 Learning Games</button>
+    <button class="filter-btn" onclick="filterCat('sensory',this)">🪀 Sensory Toys</button>
+    <button class="filter-btn" onclick="filterCat('activity',this)">🎯 Activity Kits</button>
+    <button class="filter-btn" onclick="filterCat('gifts',this)">🎁 Gift Sets</button>
+  </div>
+</div>
+
+<!-- ══════════════ PUZZLES ══════════════ -->
+<section class="cat-section" id="puzzles" data-cat="puzzles">
+  <div class="container">
+    <div class="cat-section-header">
+      <div>
+        <span class="cat-section-emoji">🧩</span>
+        <div class="label">Category</div>
+        <h2>Puzzles</h2>
+        <p>Build patience, spatial thinking and concentration with our beautifully illustrated puzzles.</p>
+      </div>
+      <a href="https://www.amazon.in/s?k=happit+puzzles" class="btn btn-primary" target="_blank" rel="noopener">Shop Puzzles on Amazon 🛒</a>
+    </div>
+    <div class="age-chips">
+      <span class="age-chip active">All Ages</span>
+      <span class="age-chip">3–4 years</span>
+      <span class="age-chip">4–5 years</span>
+      <span class="age-chip">5–7 years</span>
+    </div>
+    <div class="prod-grid">
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#EDE7F9">
+          <div class="prod-badge-abs"><span class="badge badge-coral">🔥 Bestseller</span></div>
+          🧩
+        </div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Rainbow Puzzle Set</h4>
+          <p class="prod-desc">48-piece puzzle with vivid rainbow colours, double-sided with a bonus drawing side.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(328)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#D4F0E8">🌍</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 4+</div>
+          <h4>World Map Puzzle</h4>
+          <p class="prod-desc">60-piece colourful world map puzzle. Learn continents and countries as you play!</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(214)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FFF3CC">🦁</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Safari Animals Puzzle</h4>
+          <p class="prod-desc">24 chunky pieces featuring jungle animals — perfect for little hands.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(176)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FDECEA">
+          <div class="prod-badge-abs"><span class="badge badge-amazon">🎁 Gift Pick</span></div>
+          🚀
+        </div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 5+</div>
+          <h4>Space Explorer Puzzle</h4>
+          <p class="prod-desc">80-piece glow-in-the-dark solar system puzzle. Science + play!</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(139)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ARTS & CRAFTS ══════════════ -->
+<section class="cat-section" id="arts" data-cat="arts">
+  <div class="container">
+    <div class="cat-section-header">
+      <div>
+        <span class="cat-section-emoji">🎨</span>
+        <div class="label">Category</div>
+        <h2>Arts &amp; Crafts</h2>
+        <p>Unleash inner artists with washable, vibrant, mess-friendly craft kits made for little hands.</p>
+      </div>
+      <a href="https://www.amazon.in/s?k=happit+art" class="btn btn-primary" target="_blank" rel="noopener">Shop Arts &amp; Crafts 🛒</a>
+    </div>
+    <div class="prod-grid">
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#D4F0E8">
+          <div class="prod-badge-abs"><span class="badge badge-mint">✨ New</span></div>
+          🎨
+        </div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Doodle &amp; Play Kit</h4>
+          <p class="prod-desc">All-in-one washable paint, brush &amp; paper kit. No mess, maximum creativity.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(195)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FFF3CC">✂️</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 4+</div>
+          <h4>Paper Craft World</h4>
+          <p class="prod-desc">200+ stickers, coloured paper, safety scissors &amp; guided project cards.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(142)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#EDE7F9">🖍️</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Rainbow Crayon Set</h4>
+          <p class="prod-desc">24 thick washable crayons in a delightful case — perfect chunky grip.</p>
+          <div class="stars">★★★★☆</div>
+          <div class="prod-footer">
+            <span class="stars-count">(203)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FDECEA">🧶</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 5+</div>
+          <h4>Friendship Bracelet Kit</h4>
+          <p class="prod-desc">Learn beginner weaving while creating beautiful friendship bracelets.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(88)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ LEARNING GAMES ══════════════ -->
+<section class="cat-section" id="learning" data-cat="learning">
+  <div class="container">
+    <div class="cat-section-header">
+      <div>
+        <span class="cat-section-emoji">📚</span>
+        <div class="label">Category</div>
+        <h2>Learning Games</h2>
+        <p>Play smart, grow smarter — games designed by educators to make learning a joy.</p>
+      </div>
+      <a href="https://www.amazon.in/s?k=happit+learning" class="btn btn-primary" target="_blank" rel="noopener">Shop Learning Games 🛒</a>
+    </div>
+    <div class="prod-grid">
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FFF3CC">
+          <div class="prod-badge-abs"><span class="badge badge-coral">🔥 Bestseller</span></div>
+          🎲
+        </div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>ABC Fun Game</h4>
+          <p class="prod-desc">Interactive alphabet card game that teaches letters, phonics &amp; spelling.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(412)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#D4F0E8">🔢</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 4+</div>
+          <h4>Number Ninja Cards</h4>
+          <p class="prod-desc">Fun counting, addition &amp; subtraction card game. 40 illustrated cards.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(284)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#EDE7F9">🧠</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 5+</div>
+          <h4>Memory Match Game</h4>
+          <p class="prod-desc">Classic memory card game with 60 illustrated pairs. Boosts concentration.</p>
+          <div class="stars">★★★★☆</div>
+          <div class="prod-footer">
+            <span class="stars-count">(167)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#D9EEFF">
+          <div class="prod-badge-abs"><span class="badge badge-amazon">🎁 Gift Pick</span></div>
+          🌏
+        </div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 4+</div>
+          <h4>My First Quiz Game</h4>
+          <p class="prod-desc">200 colourful quiz cards covering animals, nature, numbers &amp; the world.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(119)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SENSORY ══════════════ -->
+<section class="cat-section" id="sensory" data-cat="sensory">
+  <div class="container">
+    <div class="cat-section-header">
+      <div>
+        <span class="cat-section-emoji">🪀</span>
+        <div class="label">Category</div>
+        <h2>Sensory Toys</h2>
+        <p>Touch, squeeze, feel and discover — toys that calm, focus and delight developing senses.</p>
+      </div>
+      <a href="https://www.amazon.in/s?k=happit+sensory" class="btn btn-primary" target="_blank" rel="noopener">Shop Sensory Toys 🛒</a>
+    </div>
+    <div class="prod-grid">
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FDECEA">🪀</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Sensory Fidget Bundle</h4>
+          <p class="prod-desc">5-piece calming sensory kit — squeeze balls, pop-its, spinners &amp; more.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(261)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#D4F0E8">🫧</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Bubble Wrap Pop Mat</h4>
+          <p class="prod-desc">Reusable pop-it mat with 6 colourful shapes. Endlessly satisfying!</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(389)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#EDE7F9">🌊</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Kinetic Sand Kit</h4>
+          <p class="prod-desc">Non-toxic kinetic sand with 6 moulds. Calm, focussed, creative play.</p>
+          <div class="stars">★★★★☆</div>
+          <div class="prod-footer">
+            <span class="stars-count">(172)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FFF3CC">🎵</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Musical Sensory Drum</h4>
+          <p class="prod-desc">Soft drum with textured surface and gentle chime sounds for auditory play.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(94)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ACTIVITY KITS ══════════════ -->
+<section class="cat-section" id="activity" data-cat="activity">
+  <div class="container">
+    <div class="cat-section-header">
+      <div>
+        <span class="cat-section-emoji">🎯</span>
+        <div class="label">Category</div>
+        <h2>Activity Kits</h2>
+        <p>All-in-one themed bundles packed with hours of enriching, hands-on fun and discovery.</p>
+      </div>
+      <a href="https://www.amazon.in/s?k=happit+activity" class="btn btn-primary" target="_blank" rel="noopener">Shop Activity Kits 🛒</a>
+    </div>
+    <div class="prod-grid">
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#D9EEFF">
+          <div class="prod-badge-abs"><span class="badge badge-coral">🔥 Top Rated</span></div>
+          🔭
+        </div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 5+</div>
+          <h4>Explorer Activity Kit</h4>
+          <p class="prod-desc">Grow crystals, build bridges, make a volcano — 6 science experiments!</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(187)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#FDECEA">👨‍🍳</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 4+</div>
+          <h4>Little Chef Play Kitchen</h4>
+          <p class="prod-desc">Pretend cooking set with 20+ pieces — pots, pans, ingredients &amp; recipe cards.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(221)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#D4F0E8">🌱</div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 4+</div>
+          <h4>Mini Garden Kit</h4>
+          <p class="prod-desc">Grow sunflowers &amp; tomatoes! Includes pots, soil, seeds &amp; a nature journal.</p>
+          <div class="stars">★★★★☆</div>
+          <div class="prod-footer">
+            <span class="stars-count">(108)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="card prod-card">
+        <div class="prod-img" style="background:#EDE7F9">
+          <div class="prod-badge-abs"><span class="badge badge-amazon">🎁 Best Gift</span></div>
+          🎪
+        </div>
+        <div class="prod-body">
+          <div class="prod-age">Ages 3+</div>
+          <h4>Mega Happit Gift Box</h4>
+          <p class="prod-desc">Our most popular gift — puzzle + art kit + learning game in a beautiful box.</p>
+          <div class="stars">★★★★★</div>
+          <div class="prod-footer">
+            <span class="stars-count">(344)</span>
+            <a href="https://www.amazon.in/s?k=happit" class="btn btn-amazon btn-sm" target="_blank" rel="noopener">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gift guide CTA -->
+    <div class="gift-cta">
+      <h3>🎁 Not sure which kit to pick?</h3>
+      <p>Tell us the child's age and interests and we'll help you find the perfect Happit toy.</p>
+      <a href="contact.html" class="btn btn-primary">Ask Us for a Recommendation</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script>
+function filterCat(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const sections = document.querySelectorAll('.cat-section');
+  sections.forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat || !s.dataset.cat) ? '' : 'none';
+  });
+  if (cat !== 'all') {
+    const target = document.getElementById(cat);
+    if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
+}
+</script>
+<script>
+  // Fix nav paths for pages/ subfolder
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.nav-logo').forEach(el => el.setAttribute('href', '../index.html'));
+      document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => {
+        const h = a.getAttribute('href');
+        if (h && h.startsWith('pages/')) a.setAttribute('href', h.replace('pages/', ''));
+      });
+      document.querySelectorAll('.footer-col a').forEach(a => {
+        const h = a.getAttribute('href');
+        if (h && h.startsWith('pages/')) a.setAttribute('href', h.replace('pages/', ''));
+      });
+    }, 50);
+  });
+</script>
+<script src="../js/components.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

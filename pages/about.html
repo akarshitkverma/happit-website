@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="The Happit story — joyful, safe toys made in India for curious kids aged 3–7."/>
+  <title>About Us — Happit</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <style>
+    .page-hero { background: linear-gradient(135deg,#FFF4F0,#FDECEA 50%,#EEE7FA); padding:70px 0 56px; text-align:center; }
+    /* Story */
+    .story { padding:88px 0; background:white; }
+    .story-inner { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+    .story-visual { background:linear-gradient(135deg,#FFF0EC,#EDE7F9); border-radius:var(--radius-lg); padding:48px; text-align:center; font-size:100px; min-height:360px; display:flex; align-items:center; justify-content:center; position:relative; }
+    .story-caption { position:absolute; bottom:20px; left:0; right:0; font-size:13px; font-weight:700; color:var(--text-light); }
+    .story-text p { font-size:16px; color:var(--text-mid); line-height:1.75; margin-bottom:20px; }
+    /* Values */
+    .values { padding:80px 0; background:var(--bg); }
+    .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
+    .value-card { padding:36px 28px; border-radius:var(--radius-lg); border:1.5px solid var(--border); background:white; transition:transform .2s; text-align:center; }
+    .value-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+    .value-icon { font-size:52px; margin-bottom:16px; display:block; }
+    .value-card h3 { font-size:20px; margin-bottom:10px; }
+    .value-card p { font-size:14px; line-height:1.65; }
+    /* Team */
+    .team { padding:80px 0; background:white; }
+    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:52px; }
+    .team-card { text-align:center; }
+    .team-avatar { width:100px; height:100px; border-radius:50%; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:44px; }
+    .team-card h4 { font-size:18px; margin-bottom:4px; }
+    .team-card .role { font-size:13px; color:var(--coral); font-weight:800; letter-spacing:0.3px; margin-bottom:10px; }
+    .team-card p { font-size:13px; color:var(--text-mid); line-height:1.6; }
+    /* Stats */
+    .about-stats { background:linear-gradient(135deg,#FFF0EC,#EDE7F9); padding:64px 0; }
+    .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+    .stat-card { background:white; border-radius:var(--radius-md); padding:32px 20px; text-align:center; box-shadow:var(--shadow-sm); }
+    .stat-num { font-family:'Baloo 2',cursive; font-size:42px; font-weight:800; color:var(--coral); display:block; }
+    .stat-lbl { font-size:14px; color:var(--text-mid); font-weight:700; margin-top:4px; }
+    /* CTA */
+    .about-cta { background:#2D2318; padding:72px 0; text-align:center; }
+    .about-cta h2 { color:white; margin-bottom:14px; }
+    .about-cta p { color:#9E8A78; font-size:17px; max-width:440px; margin:0 auto 32px; }
+    @media(max-width:900px){ .story-inner,.values-grid,.team-grid { grid-template-columns:1fr; } .stats-row { grid-template-columns:repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-hero">
+  <div class="container">
+    <div class="label">Our Story</div>
+    <h1>Made with Heart 💛</h1>
+    <p>We're a small, passionate team who believe every child deserves toys that are safe, joyful, and genuinely educational.</p>
+  </div>
+</div>
+
+<section class="story">
+  <div class="container">
+    <div class="story-inner">
+      <div class="story-visual anim-float">🌻<div class="story-caption">Started in 2022, Gurugram</div></div>
+      <div class="story-text">
+        <div class="label">How it started</div>
+        <h2>A Parent's Dream for Every Child</h2>
+        <p>Happit was born out of a simple frustration — finding safe, truly fun toys for young kids that were also genuinely educational was harder than it should be. Too many toys were either boring or unsafe, with poor materials and zero thought for development.</p>
+        <p>We set out to change that. Working with child development specialists, safety engineers, and — most importantly — real kids and their parents, we created a range of toys that tick every box: safe, certified, beautiful, and irresistibly fun.</p>
+        <p>Today, Happit is trusted by over 10,000 families across India. Every product is carefully designed, rigorously tested, and sold exclusively through Amazon India so you always get authentic, quality-assured products with easy returns.</p>
+        <a href="pages/safety.html" class="btn btn-secondary" style="margin-top:8px">Our Safety Standards →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-stats">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-card"><span class="stat-num">10K+</span><div class="stat-lbl">Happy Families</div></div>
+      <div class="stat-card"><span class="stat-num">4.8★</span><div class="stat-lbl">Average Rating</div></div>
+      <div class="stat-card"><span class="stat-num">20+</span><div class="stat-lbl">Products Available</div></div>
+      <div class="stat-card"><span class="stat-num">100%</span><div class="stat-lbl">BIS Certified</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="container">
+    <div class="section-header center">
+      <div class="label">What We Stand For</div>
+      <h2>Our Values</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card"><span class="value-icon">🛡️</span><h3>Safety Always</h3><p>Every product uses non-toxic, BIS-certified materials and passes rigorous child-safety tests before going on sale.</p></div>
+      <div class="value-card"><span class="value-icon">🎓</span><h3>Learning Through Play</h3><p>We design with child development research at the core — every toy has a developmental purpose alongside its fun.</p></div>
+      <div class="value-card"><span class="value-icon">🌱</span><h3>Sustainability</h3><p>Eco-friendly packaging, responsibly sourced materials, and a commitment to reducing our environmental footprint.</p></div>
+      <div class="value-card"><span class="value-icon">💛</span><h3>Inclusive Joy</h3><p>Toys for all children regardless of ability, background or preference. Play is universal.</p></div>
+      <div class="value-card"><span class="value-icon">🤝</span><h3>Parent Trust</h3><p>Transparent about ingredients, safety standards, and testing processes. No secrets, ever.</p></div>
+      <div class="value-card"><span class="value-icon">🇮🇳</span><h3>Proudly Indian</h3><p>Built in India, for Indian families — culturally relevant designs that celebrate our rich heritage.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="container">
+    <div class="section-header center">
+      <div class="label">The People</div>
+      <h2>Meet the Happit Team</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background:#EDE7F9">👩</div>
+        <h4>Priya Sharma</h4>
+        <div class="role">Founder &amp; CEO</div>
+        <p>A mother of two, former educator and product designer passionate about children's learning and wellbeing.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#D4F0E8">👨</div>
+        <h4>Arjun Mehta</h4>
+        <div class="role">Head of Design</div>
+        <p>12 years in toy design, specialising in play psychology and child-centred product development.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:#FFF3CC">👩</div>
+        <h4>Neha Kapoor</h4>
+        <div class="role">Child Development Expert</div>
+        <p>Child psychologist and play therapist who ensures every Happit product serves genuine developmental goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-cta">
+  <div class="container">
+    <h2>Ready to Make a Little One Happy?</h2>
+    <p>Browse our full range of joyful, safe toys — available exclusively on Amazon India.</p>
+    <a href="https://www.amazon.in/s?k=happit" class="btn btn-primary btn-lg" target="_blank" rel="noopener">Shop All Happit Toys 🛒</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="../js/components.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded',()=>{ setTimeout(()=>{ document.querySelector('.nav-logo')?.setAttribute('href','../index.html'); document.querySelectorAll('.nav-links a,.mobile-menu a').forEach(a=>{ const h=a.getAttribute('href'); if(h&&h.startsWith('pages/')) a.setAttribute('href',h.replace('pages/','')); }); },50); });
+</script>
+</body>
+</html>

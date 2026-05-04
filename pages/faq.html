@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FAQ — Happit</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <style>
+    .page-hero { background:linear-gradient(135deg,#FFF4F0,#FDECEA 50%,#EEE7FA); padding:70px 0 56px; text-align:center; }
+    .faq-section { padding:88px 0; background:white; }
+    .faq-inner { max-width:760px; margin:0 auto; }
+    .faq-categories { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:48px; }
+    .faq-cat { padding:8px 20px; border-radius:var(--radius-pill); border:1.5px solid var(--border); font-size:13px; font-weight:700; cursor:pointer; background:white; color:var(--text-mid); transition:all .2s; }
+    .faq-cat:hover,.faq-cat.active { background:var(--coral); color:white; border-color:var(--coral); }
+    .faq-group { margin-bottom:40px; }
+    .faq-group-title { font-family:'Baloo 2',cursive; font-size:20px; font-weight:700; color:var(--text); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+    .faq-item { border:1.5px solid var(--border); border-radius:var(--radius-md); margin-bottom:10px; overflow:hidden; transition:border-color .2s; }
+    .faq-item.open { border-color:var(--coral); }
+    .faq-q { padding:18px 22px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:700; font-size:15px; color:var(--text); gap:16px; }
+    .faq-q:hover { background:var(--coral-light); }
+    .faq-chevron { font-size:18px; color:var(--coral); flex-shrink:0; transition:transform .3s; }
+    .faq-item.open .faq-chevron { transform:rotate(180deg); }
+    .faq-a { display:none; padding:0 22px 20px; font-size:14px; color:var(--text-mid); line-height:1.75; }
+    .faq-item.open .faq-a { display:block; }
+    .faq-cta { background:linear-gradient(135deg,#FFF0EC,#EDE7F9); border-radius:var(--radius-lg); padding:44px; text-align:center; margin-top:56px; }
+    .faq-cta h3 { font-size:26px; margin-bottom:10px; }
+    .faq-cta p { color:var(--text-mid); margin-bottom:24px; }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-hero">
+  <div class="container">
+    <div class="label">Help Centre</div>
+    <h1>Frequently Asked Questions ❓</h1>
+    <p>Everything you need to know about Happit toys, ordering, safety and more.</p>
+  </div>
+</div>
+
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-inner">
+      <div class="faq-categories">
+        <span class="faq-cat active" onclick="filterFaq('all',this)">All Questions</span>
+        <span class="faq-cat" onclick="filterFaq('ordering',this)">🛒 Ordering</span>
+        <span class="faq-cat" onclick="filterFaq('safety',this)">🛡️ Safety</span>
+        <span class="faq-cat" onclick="filterFaq('products',this)">🧸 Products</span>
+        <span class="faq-cat" onclick="filterFaq('returns',this)">↩️ Returns</span>
+      </div>
+
+      <div class="faq-group" data-group="ordering">
+        <div class="faq-group-title">🛒 Ordering &amp; Delivery</div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Where can I buy Happit toys?<span class="faq-chevron">▾</span></div><div class="faq-a">Happit toys are sold exclusively on Amazon India. This ensures every product you receive is authentic, quality-assured, and backed by Amazon's delivery and return guarantees. <a href="https://www.amazon.in/s?k=happit" style="color:var(--coral);font-weight:700" target="_blank">Shop on Amazon →</a></div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does delivery take?<span class="faq-chevron">▾</span></div><div class="faq-a">Delivery times depend on your location and Amazon's current logistics. Most orders within metro cities arrive in 1–2 business days with Amazon Prime. Other areas typically receive delivery in 3–5 business days.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you offer Cash on Delivery?<span class="faq-chevron">▾</span></div><div class="faq-a">Yes! Since we sell through Amazon India, all of Amazon's payment options are available including Cash on Delivery, UPI, credit/debit cards, and Amazon Pay.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I buy Happit toys in bulk for schools or events?<span class="faq-chevron">▾</span></div><div class="faq-a">Yes, we love bulk orders for schools, birthday parties and corporate gifting! Contact us directly for bulk pricing and special packaging options. We offer discounts for orders of 20+ units.</div></div>
+      </div>
+
+      <div class="faq-group" data-group="safety">
+        <div class="faq-group-title">🛡️ Safety &amp; Certifications</div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are Happit toys BIS certified?<span class="faq-chevron">▾</span></div><div class="faq-a">Yes. Every Happit toy is certified by the Bureau of Indian Standards (BIS), which is the highest toy safety standard in India. Our certification covers material safety, mechanical safety, and age-appropriateness.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are the paints and dyes safe if my child puts them in their mouth?<span class="faq-chevron">▾</span></div><div class="faq-a">All colouring materials (paints, crayons, markers) used in Happit products are non-toxic, water-based, and certified to EN71-3 standards. While we don't encourage children to eat them, small amounts are not harmful. They are washable from skin and most fabrics.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are there small parts that could be choking hazards?<span class="faq-chevron">▾</span></div><div class="faq-a">All Happit toys for 3+ years pass the EU and IS choke-hazard tests — meaning no part is small enough to pose a risk to children in that age group. Products for 5+ years may contain smaller components and are clearly labelled.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is your packaging eco-friendly?<span class="faq-chevron">▾</span></div><div class="faq-a">Yes! All Happit packaging is made from recycled cardboard with soy-based inks. We use zero plastic windows, zero styrofoam, and zero plastic twist-ties. The box itself is a toy — we encourage kids to use it for creative projects!</div></div>
+      </div>
+
+      <div class="faq-group" data-group="products">
+        <div class="faq-group-title">🧸 Products &amp; Recommendations</div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What age range are Happit toys suitable for?<span class="faq-chevron">▾</span></div><div class="faq-a">Our full range is designed for children aged 3 to 7 years. Each individual product has a specific age recommendation (3+, 4+, or 5+) printed on the packaging and listed on Amazon. These are based on developmental appropriateness and safety testing.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Which toy do you recommend as a first gift?<span class="faq-chevron">▾</span></div><div class="faq-a">Our most universally loved gift is the Mega Happit Gift Box — it contains a puzzle, art kit and learning game in a beautiful gift-ready box. It's suitable for ages 3+ and is our most gifted product. Alternatively, our Rainbow Puzzle Set is a perennial bestseller.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you make toys for children with special needs?<span class="faq-chevron">▾</span></div><div class="faq-a">Our Sensory Toys range (fidget bundles, pop-it mats, kinetic sand) are particularly popular with children who have sensory processing differences, ADHD, or autism. We're actively developing more inclusive products — contact us if you have specific needs and we'd love to help.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Will you launch new products?<span class="faq-chevron">▾</span></div><div class="faq-a">Yes! We launch new products every quarter. Subscribe to our newsletter to be the first to know about new arrivals, and follow us on Instagram for sneak peeks behind the scenes.</div></div>
+      </div>
+
+      <div class="faq-group" data-group="returns">
+        <div class="faq-group-title">↩️ Returns &amp; Support</div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the return policy?<span class="faq-chevron">▾</span></div><div class="faq-a">Since we sell through Amazon India, all orders are covered by Amazon's standard return policy — typically 10 days from delivery for a full refund. If you have issues with a product, you can also contact us directly and we'll make it right.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if a product arrives damaged?<span class="faq-chevron">▾</span></div><div class="faq-a">Please photograph the damaged item and report it immediately through Amazon's "Report a problem" feature for the fastest resolution. You can also email us at support@happit.in and we'll personally ensure you get a replacement.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I contact Happit directly?<span class="faq-chevron">▾</span></div><div class="faq-a">You can reach us at <a href="mailto:hello@happit.in" style="color:var(--coral);font-weight:700">hello@happit.in</a> or through our <a href="contact.html" style="color:var(--coral);font-weight:700">contact form</a>. We respond within 24 hours on weekdays. You can also DM us on Instagram @happit.in.</div></div>
+      </div>
+
+      <div class="faq-cta">
+        <h3>Still have a question?</h3>
+        <p>Our friendly team is happy to help with anything — product recommendations, bulk orders, or just a chat about child development!</p>
+        <a href="contact.html" class="btn btn-primary">Contact Us →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script>
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+function filterFaq(group, chip) {
+  document.querySelectorAll('.faq-cat').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  document.querySelectorAll('.faq-group').forEach(g => {
+    g.style.display = (group === 'all' || g.dataset.group === group) ? '' : 'none';
+  });
+}
+</script>
+<script src="../js/components.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{document.querySelector('.nav-logo')?.setAttribute('href','../index.html');document.querySelectorAll('.nav-links a,.mobile-menu a').forEach(a=>{const h=a.getAttribute('href');if(h&&h.startsWith('pages/'))a.setAttribute('href',h.replace('pages/',''));});},50);});</script>
+</body>
+</html>

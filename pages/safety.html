@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safety &amp; Quality — Happit</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="../css/nav.css"/>
+  <link rel="stylesheet" href="../css/footer.css"/>
+  <style>
+    .page-hero { background:linear-gradient(135deg,var(--mint),var(--sky)); padding:70px 0 56px; text-align:center; }
+    .page-hero h1, .page-hero .label { color: #1A5E48; }
+    .page-hero p { color:#1E5A4A; }
+    .safety-intro { padding:80px 0; background:white; }
+    .safety-intro-inner { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .safety-badges-big { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .sb-card { background:var(--bg); border-radius:var(--radius-lg); padding:28px 24px; text-align:center; border:1.5px solid var(--border); }
+    .sb-card .icon { font-size:44px; margin-bottom:12px; display:block; }
+    .sb-card h4 { font-size:17px; margin-bottom:6px; }
+    .sb-card p { font-size:13px; color:var(--text-mid); line-height:1.55; }
+    .process { padding:80px 0; background:var(--bg); }
+    .process-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:52px; position:relative; }
+    .process-steps::before { content:''; position:absolute; top:36px; left:calc(12.5% + 18px); right:calc(12.5% + 18px); height:2px; background:var(--border); z-index:0; }
+    .step-card { text-align:center; position:relative; z-index:1; }
+    .step-num { width:72px; height:72px; border-radius:50%; background:var(--coral); color:white; font-family:'Baloo 2',cursive; font-size:26px; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; box-shadow:var(--shadow-coral); }
+    .step-card h4 { font-size:17px; margin-bottom:8px; }
+    .step-card p { font-size:13px; color:var(--text-mid); line-height:1.55; }
+    .materials { padding:80px 0; background:white; }
+    .mat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
+    .mat-card { padding:32px; border-radius:var(--radius-lg); border:1.5px solid var(--border); }
+    .mat-icon { font-size:40px; margin-bottom:14px; }
+    .mat-card h4 { font-size:18px; margin-bottom:8px; }
+    .mat-card p { font-size:14px; line-height:1.65; }
+    .safety-promise { background:linear-gradient(135deg,var(--mint),var(--sky)); padding:72px 0; text-align:center; }
+    .safety-promise h2 { color:#1A5E48; margin-bottom:14px; }
+    .safety-promise p { color:#1E5A4A; font-size:17px; max-width:520px; margin:0 auto 32px; }
+    @media(max-width:900px){ .safety-intro-inner { grid-template-columns:1fr; } .process-steps,.mat-grid { grid-template-columns:repeat(2,1fr); } .process-steps::before { display:none; } }
+    @media(max-width:600px){ .safety-badges-big,.process-steps,.mat-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<div class="page-hero">
+  <div class="container">
+    <div class="label">Safety &amp; Quality</div>
+    <h1>Play Safe, Always 🛡️</h1>
+    <p>Every single Happit toy passes rigorous safety testing so parents can let little ones play freely.</p>
+  </div>
+</div>
+
+<section class="safety-intro">
+  <div class="container">
+    <div class="safety-intro-inner">
+      <div>
+        <div class="label">Our Commitment</div>
+        <h2>Safety is Never a Compromise</h2>
+        <p style="font-size:16px;color:var(--text-mid);line-height:1.75;margin-top:14px;margin-bottom:20px">At Happit, safety isn't a feature — it's the foundation. Every toy begins with safety requirements and is designed, manufactured, and tested to meet the highest standards available in India.</p>
+        <p style="font-size:16px;color:var(--text-mid);line-height:1.75;margin-bottom:28px">We work with accredited third-party labs to test every batch of products, ensuring consistency across every single item we sell.</p>
+        <a href="contact.html" class="btn btn-primary">Ask Us About Safety</a>
+      </div>
+      <div class="safety-badges-big">
+        <div class="sb-card"><span class="icon">🏅</span><h4>BIS Certified</h4><p>Bureau of Indian Standards certified — India's highest toy safety benchmark.</p></div>
+        <div class="sb-card"><span class="icon">🌿</span><h4>Non-toxic</h4><p>Zero harmful chemicals. All paints, dyes and materials are food-grade safe.</p></div>
+        <div class="sb-card"><span class="icon">🔬</span><h4>Lab Tested</h4><p>Every batch is tested in accredited third-party labs before reaching your door.</p></div>
+        <div class="sb-card"><span class="icon">♻️</span><h4>Eco Packaging</h4><p>Recycled and biodegradable packaging with soy-based inks. Zero plastic wrapping.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="container">
+    <div class="section-header center">
+      <div class="label">Our Process</div>
+      <h2>How We Ensure Every Toy is Safe</h2>
+    </div>
+    <div class="process-steps">
+      <div class="step-card"><div class="step-num">1</div><h4>Design Review</h4><p>Every new toy is reviewed by child safety experts before entering production.</p></div>
+      <div class="step-card"><div class="step-num">2</div><h4>Material Sourcing</h4><p>Only pre-approved, certified material suppliers are used. No substitutions.</p></div>
+      <div class="step-card"><div class="step-num">3</div><h4>Lab Testing</h4><p>Prototypes and production batches go to accredited labs for full safety testing.</p></div>
+      <div class="step-card"><div class="step-num">4</div><h4>BIS Certification</h4><p>Final products receive BIS certification before being listed on Amazon.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="materials">
+  <div class="container">
+    <div class="section-header center">
+      <div class="label">Materials</div>
+      <h2>What Goes Into Every Happit Toy</h2>
+    </div>
+    <div class="mat-grid">
+      <div class="mat-card"><div class="mat-icon">🖍️</div><h4>Washable, Non-toxic Dyes</h4><p>All colouring materials use EN71-certified, water-soluble dyes with zero harmful solvents. Safe even if ingested in small amounts.</p></div>
+      <div class="mat-card"><div class="mat-icon">🪵</div><h4>Child-safe Plastics &amp; Wood</h4><p>BPA-free plastics only. Wood pieces use FSC-certified timber with rounded edges and sanded surfaces — no splinters.</p></div>
+      <div class="mat-card"><div class="mat-icon">🧵</div><h4>Soft, Hypoallergenic Fabrics</h4><p>All fabric-based toys use OEKO-TEX certified materials, free from allergens, heavy metals and formaldehyde.</p></div>
+      <div class="mat-card"><div class="mat-icon">🔩</div><h4>No Small Parts</h4><p>Every piece in our 3+ range passes the choke-hazard test. For 5+ products, age-appropriate warning labels are always included.</p></div>
+      <div class="mat-card"><div class="mat-icon">📦</div><h4>Eco Packaging</h4><p>100% recyclable cardboard boxes with soy-based inks. No styrofoam, no plastic windows, no twist ties. Just the toy.</p></div>
+      <div class="mat-card"><div class="mat-icon">🌡️</div><h4>Durability Tested</h4><p>Drop tests, stress tests, and thermal tests ensure our toys survive the rough-and-tumble reality of kids' play.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="safety-promise">
+  <div class="container">
+    <h2>Our Safety Promise to You</h2>
+    <p>If any Happit product ever fails to meet your safety expectations, contact us and we'll make it right — no questions asked.</p>
+    <a href="contact.html" class="btn btn-primary">Contact Our Team</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="../js/components.js"></script>
+<script>document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{document.querySelector('.nav-logo')?.setAttribute('href','../index.html');document.querySelectorAll('.nav-links a,.mobile-menu a').forEach(a=>{const h=a.getAttribute('href');if(h&&h.startsWith('pages/'))a.setAttribute('href',h.replace('pages/',''));});},50);});</script>
+</body>
+</html>
